@@ -348,9 +348,15 @@ mn.style.top=Math.max(0,Math.min(y,window.innerHeight-mn.offsetHeight))+'px';}\
 /* The card a right-click at widget point (x, y) belongs to, in a view w\
    widget pixels wide: the one under it, or the nearest when the click fell\
    between cards. And the selected text, for Copy. A right-click anywhere\
-   else dismisses the address menu, as a click does. */\
+   else dismisses the address menu, as a click does. One on an address\
+   opens the address menu and answers {mail:1}: WebKit sends the page's\
+   contextmenu event to the body frame a previous right-click pressed in,\
+   whose release the app's menu took, so the listener above misses it (#529). */\
 window.__hylkiMenuAt=function(x,y,w){hideMailMenu();var r=window.innerWidth/w;x*=r;y*=r;\
-var el=document.elementFromPoint(x,y);var m=el&&el.closest?el.closest('.hylki-msg'):null;\
+var el=document.elementFromPoint(x,y);\
+var ml=el&&el.closest?el.closest('.hylki-mail'):null;\
+if(ml&&ml.dataset.mail){showMailMenu(x,y,ml.dataset.mail);return JSON.stringify({mail:1});}\
+var m=el&&el.closest?el.closest('.hylki-msg'):null;\
 if(!m){var ms=document.querySelectorAll('.hylki-msg'),d=1e9;\
 for(var i=0;i<ms.length;i++){var b=ms[i].getBoundingClientRect();\
 var e=y<b.top?b.top-y:(y>b.bottom?y-b.bottom:0);if(e<d){d=e;m=ms[i];}}}\

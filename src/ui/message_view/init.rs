@@ -7,7 +7,7 @@
 use super::bridge::{parse_bridge, Bridge};
 use super::chrome::ClassRules;
 use super::links::{is_launchable_uri, link_destination, CLICK_LINK_PROBE};
-use super::menu::{menu_lookup, MenuHit};
+use super::menu::{menu_lookup, menu_took_address, MenuHit};
 use super::page_fade::PageFade;
 use super::types::MessageViewInput;
 use super::MessageView;
@@ -245,6 +245,9 @@ impl MessageView {
                     None::<&gtk::gio::Cancellable>,
                     move |r| {
                         let json = r.map(|v| v.to_str().to_string()).unwrap_or_default();
+                        if menu_took_address(&json) {
+                            return;
+                        }
                         let (key, text) = menu_lookup(&json);
                         if key.is_none() {
                             tracing::debug!("reader menu: no card at {x:.0},{y:.0} ({json:?})");

@@ -146,6 +146,13 @@ pub(super) fn menu_lookup(json: &str) -> (Option<(u32, u32)>, Option<String>) {
     (key, sel)
 }
 
+/// Whether `__hylkiMenuAt` found an address under the pointer and opened
+/// the page's own address menu, so the message's menu stays shut.
+pub(super) fn menu_took_address(json: &str) -> bool {
+    serde_json::from_str::<serde_json::Value>(json)
+        .is_ok_and(|v| v.get("mail").is_some())
+}
+
 /// Take WebKit's Back, Forward, Stop and Reload out of a context menu. Every
 /// view here shows a document loaded from a string, so there is no page to go
 /// back to or fetch again, and Reload ended on "Connection refused" (#301).

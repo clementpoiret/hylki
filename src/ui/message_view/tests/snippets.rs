@@ -58,6 +58,9 @@ fn a_right_click_names_its_card() {
     );
     assert_eq!(menu_lookup(r#"{"key":"","sel":"   "}"#), (None, None));
     assert_eq!(menu_lookup(""), (None, None));
+    assert!(menu_took_address(r#"{"mail":1}"#));
+    assert!(!menu_took_address(r#"{"key":"2:41","sel":""}"#));
+    assert!(!menu_took_address(""));
 }
 
 // ===== Meeting invitations (#223) =====
