@@ -4969,8 +4969,8 @@ msgstr "Arrossega per moure"
 msgid "Left group"
 msgstr "Grup esquerre"
 
-msgid "Always shown · up to 6"
-msgstr "Sempre visible · fins a 6"
+msgid "Always shown · up to {n}"
+msgstr "Sempre visible · fins a {n}"
 
 msgid "Right group"
 msgstr "Grup dret"
@@ -6927,6 +6927,9 @@ msgid ""
 msgstr ""
 "Arrossega els botons entre els grups. El grup dret es replega a ⋯ quan el "
 "panell és estret."
+
+msgid "Always fold the right group into ⋯"
+msgstr ""
 
 msgid ""
 "The parts switched on below hide while Focus Mode is on. Activated by "

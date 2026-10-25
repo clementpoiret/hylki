@@ -101,6 +101,7 @@ list_search_open = false
 contacts_search_open = false
 list_search_bottom = false
 list_bulk_bar_bottom = false
+toolbar_fold_right = true
 single_key_shortcuts = false
 gmail_keys = false
 keep_downloads_days = 0

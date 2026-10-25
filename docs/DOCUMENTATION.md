@@ -1505,13 +1505,25 @@ What you fold or open stays that way while the conversation is on screen,
 and so does a message read while it is open.
 Printing shows every message in full.
 
+### The reader's toolbar
+
+The buttons above the message are in two groups. The left group, up to seven
+buttons, stays on the bar at every width: Reply, Reply All, Forward, Star,
+Archive, Spam and Delete by default. The right group folds into a ⋯ menu:
+always while **Settings → Appearance → Always fold the right group into ⋯**
+is on, as it is on a new install, and otherwise only when the pane is too
+narrow for it.
+**Settings → Appearance → Toolbar** moves buttons between the groups, or out
+of the toolbar, by dragging them; right-clicking an empty part of the
+toolbar opens it there.
+
 ### A message in its own window
 
 Double-clicking a message in the list, or a message's header in a
 conversation, opens it in a window of its own. Its toolbar is the reader's:
 the same buttons in the order **Settings → Appearance → Toolbar** gives
-them, and in a narrow window the right-hand group folds into a ⋯ menu as it
-does in the main window. Its files are in the attachment drawer under the
+them, and the right-hand group folds into a ⋯ menu as it does in the main
+window. Its files are in the attachment drawer under the
 message, and on each message's card when those are switched on, and images
 and PDFs open in the same full-window preview. A conversation's window
 gathers the files of every message in it. Its Reader View switch changes

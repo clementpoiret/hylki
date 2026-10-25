@@ -5019,8 +5019,8 @@ msgstr "Faites glisser pour déplacer"
 msgid "Left group"
 msgstr "Groupe de gauche"
 
-msgid "Always shown · up to 6"
-msgstr "Toujours affiché · jusqu’à 6"
+msgid "Always shown · up to {n}"
+msgstr "Toujours affiché · jusqu’à {n}"
 
 msgid "Right group"
 msgstr "Groupe de droite"
@@ -6990,6 +6990,9 @@ msgid ""
 msgstr ""
 "Faites glisser les boutons entre les groupes. Le groupe de droite se replie "
 "dans ⋯ lorsque le volet est étroit."
+
+msgid "Always fold the right group into ⋯"
+msgstr ""
 
 msgid ""
 "The parts switched on below hide while Focus Mode is on. Activated by "

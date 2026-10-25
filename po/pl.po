@@ -5258,8 +5258,8 @@ msgstr "Przeciągnij, aby przenieść"
 msgid "Left group"
 msgstr "Lewa grupa"
 
-msgid "Always shown · up to 6"
-msgstr "Zawsze wyświetlane · maksymalnie 6"
+msgid "Always shown · up to {n}"
+msgstr "Zawsze wyświetlane · maksymalnie {n}"
 
 msgid "Right group"
 msgstr "Prawa grupa"
@@ -7290,6 +7290,9 @@ msgstr "Pasek narzędzi"
 msgid ""
 "Drag buttons between the groups. The right group folds into ⋯ when the pane "
 "is narrow."
+msgstr ""
+
+msgid "Always fold the right group into ⋯"
 msgstr ""
 
 msgid ""

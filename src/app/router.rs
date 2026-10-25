@@ -457,6 +457,7 @@ impl AppModel {
             | PrefOutput::ImportSettings
             | PrefOutput::ContactSourcesChanged) => self.on_prefs_data_pref(pref, sender),
             pref @ (PrefOutput::SetReaderToolbar(..)
+            | PrefOutput::SetToolbarFoldRight(..)
             | PrefOutput::SetShowRemoteBanner(..)
             | PrefOutput::SetShowSpoofBanner(..)
             | PrefOutput::SetAutoRemoteContent(..)

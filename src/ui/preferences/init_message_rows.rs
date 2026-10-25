@@ -85,6 +85,10 @@ impl Preferences {
             .desktop_icons_row
             .set_active(init.desktop_icons);
         widgets
+            .appearance
+            .toolbar_fold_row
+            .set_active(init.toolbar_fold_right);
+        widgets
             .reading
             .reader_default_row
             .set_model(Some(&gtk::StringList::new(&[

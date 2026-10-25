@@ -532,7 +532,8 @@ impl SimpleComponent for AppModel {
                                 // relayout_reader_toolbar. The left group stays
                                 // at every width; the right group folds into
                                 // the ⋯ overflow. Default left group: Reply,
-                                // Reply All, Forward, Star, Archive, Delete.
+                                // Reply All, Forward, Star, Archive, Spam,
+                                // Delete.
                                 #[name = "tb_reply"]
                                 pack_start = &gtk::Revealer {
                                     set_transition_type: gtk::RevealerTransitionType::SlideRight,

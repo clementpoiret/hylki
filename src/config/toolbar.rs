@@ -122,7 +122,11 @@ pub(crate) enum ToolbarSide {
 /// left group never folds, so it has to fit the narrowest reader with the
 /// overflow button beside it. The right group has no limit: it folds into
 /// the overflow menu before it can reach the left one.
-pub(crate) const TOOLBAR_LEFT_MAX: usize = 6;
+pub(crate) const TOOLBAR_LEFT_MAX: usize = 7;
+
+/// How far a saved layout has been brought up to the default's changes:
+/// 1 moved Spam from the right group to the left, after Archive.
+const TOOLBAR_REVISION: u32 = 1;
 
 /// The buttons there were before toolbar.toml listed the ones it knew of:
 /// a file without that list knew these, and any other is new to it.
@@ -157,13 +161,13 @@ impl Default for ReaderToolbar {
                 ToolbarItem::Forward,
                 ToolbarItem::Star,
                 ToolbarItem::Archive,
+                ToolbarItem::Spam,
                 ToolbarItem::Delete,
             ],
             right: vec![
                 ToolbarItem::Snooze,
                 ToolbarItem::Tags,
                 ToolbarItem::ReadUnread,
-                ToolbarItem::Spam,
                 ToolbarItem::MoveTo,
                 ToolbarItem::Find,
                 ToolbarItem::Print,
@@ -241,6 +245,10 @@ pub(super) struct ToolbarFile {
     /// newer one's buttons are told from the ones put away (#527).
     #[serde(default)]
     pub(super) known: Vec<String>,
+    /// The `TOOLBAR_REVISION` the file was written at; older files get
+    /// the default's later changes once, on load.
+    #[serde(default)]
+    pub(super) revision: u32,
 }
 
 impl ToolbarFile {
@@ -252,6 +260,7 @@ impl ToolbarFile {
                 .iter()
                 .map(|i| i.key().to_string())
                 .collect(),
+            revision: TOOLBAR_REVISION,
         }
     }
 
@@ -290,8 +299,30 @@ impl ToolbarFile {
             let index = list.iter().position(|i| *i == item).unwrap_or(0);
             layout.place(item, Some(side), index);
         }
+        if self.revision < 1 {
+            spam_beside_archive(&mut layout);
+        }
         layout
     }
+}
+
+/// Spam moved to the default left group, between Archive and Delete. A
+/// layout saved before gets it too, but only while its left group is the
+/// old default one: a left group of someone's own choosing is left alone.
+fn spam_beside_archive(layout: &mut ReaderToolbar) {
+    use ToolbarItem as T;
+    const OLD_LEFT: [ToolbarItem; 6] = [
+        T::Reply,
+        T::ReplyAll,
+        T::Forward,
+        T::Star,
+        T::Archive,
+        T::Delete,
+    ];
+    if layout.left != OLD_LEFT || layout.side(T::Spam) != Some(ToolbarSide::Right) {
+        return;
+    }
+    layout.place(T::Spam, Some(ToolbarSide::Left), 5);
 }
 
 fn toolbar_path() -> Option<PathBuf> {
@@ -364,6 +395,42 @@ mod toolbar_tests {
         assert_eq!(back.layout().side(ToolbarItem::Snooze), None);
         // A button the old file knew of and left out stays out.
         assert_eq!(old.layout().side(ToolbarItem::Find), None);
+    }
+
+    #[test]
+    fn spam_joins_only_an_untouched_left_group_once() {
+        let old_right = "right = [\"snooze\", \"tags\", \"read_unread\", \"spam\", \"move_to\", \"find\", \"print\"]\n";
+        // The old default left group: Spam goes between Archive and Delete.
+        let old: ToolbarFile = toml::from_str(&format!(
+            "left = [\"reply\", \"reply_all\", \"forward\", \"star\", \"archive\", \"delete\"]\n{old_right}"
+        ))
+        .unwrap();
+        assert_eq!(old.layout(), ReaderToolbar::default());
+        // A left group of the user's own (reordered, or other buttons):
+        // Spam stays on the right.
+        for left in [
+            "[\"reply\", \"reply_all\", \"forward\", \"star\", \"delete\", \"archive\"]",
+            "[\"reply\", \"forward\", \"star\", \"archive\", \"delete\"]",
+        ] {
+            let custom: ToolbarFile =
+                toml::from_str(&format!("left = {left}\n{old_right}")).unwrap();
+            assert_eq!(
+                custom.layout().side(ToolbarItem::Spam),
+                Some(ToolbarSide::Right)
+            );
+        }
+        // Put away with the default left group: it stays away.
+        let hidden: ToolbarFile = toml::from_str(
+            "left = [\"reply\", \"reply_all\", \"forward\", \"star\", \"archive\", \"delete\"]\nright = [\"print\"]\n",
+        )
+        .unwrap();
+        assert_eq!(hidden.layout().side(ToolbarItem::Spam), None);
+        // Saved since, back on the right: it stays there.
+        let mut moved = ReaderToolbar::default();
+        moved.place(ToolbarItem::Spam, Some(ToolbarSide::Right), 0);
+        let text = toml::to_string(&ToolbarFile::of(&moved)).unwrap();
+        let back: ToolbarFile = toml::from_str(&text).unwrap();
+        assert_eq!(back.layout(), moved);
     }
 
     #[test]

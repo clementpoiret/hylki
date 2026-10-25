@@ -4976,8 +4976,8 @@ msgstr "Arraste para mover"
 msgid "Left group"
 msgstr "Grupo esquerdo"
 
-msgid "Always shown · up to 6"
-msgstr "Sempre exibido · até 6"
+msgid "Always shown · up to {n}"
+msgstr "Sempre exibido · até {n}"
 
 msgid "Right group"
 msgstr "Grupo direito"
@@ -6940,6 +6940,9 @@ msgid ""
 msgstr ""
 "Arraste os botões entre os grupos. O grupo da direita é recolhido em ⋯ "
 "quando o painel é estreito."
+
+msgid "Always fold the right group into ⋯"
+msgstr ""
 
 msgid ""
 "The parts switched on below hide while Focus Mode is on. Activated by "

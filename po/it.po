@@ -5145,8 +5145,8 @@ msgstr "Trascina per spostare"
 msgid "Left group"
 msgstr "Gruppo sinistra"
 
-msgid "Always shown · up to 6"
-msgstr "Sempre visibile · fino a 6"
+msgid "Always shown · up to {n}"
+msgstr "Sempre visibile · fino a {n}"
 
 msgid "Right group"
 msgstr "Gruppo destra"
@@ -7145,6 +7145,9 @@ msgstr "Barra degli strumenti"
 msgid ""
 "Drag buttons between the groups. The right group folds into ⋯ when the pane "
 "is narrow."
+msgstr ""
+
+msgid "Always fold the right group into ⋯"
 msgstr ""
 
 msgid ""

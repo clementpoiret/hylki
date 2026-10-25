@@ -5044,8 +5044,8 @@ msgstr "Σύρετε για μετακίνηση"
 msgid "Left group"
 msgstr "Αριστερή ομάδα"
 
-msgid "Always shown · up to 6"
-msgstr "Πάντα ορατή · έως 6"
+msgid "Always shown · up to {n}"
+msgstr "Πάντα ορατή · έως {n}"
 
 msgid "Right group"
 msgstr "Δεξιά ομάδα"
@@ -7045,6 +7045,9 @@ msgid ""
 msgstr ""
 "Σύρετε τα κουμπιά μεταξύ των ομάδων. Η δεξιά ομάδα συμπτύσσεται σε ⋯ όταν το "
 "πλαίσιο είναι στενό."
+
+msgid "Always fold the right group into ⋯"
+msgstr ""
 
 msgid ""
 "The parts switched on below hide while Focus Mode is on. Activated by "

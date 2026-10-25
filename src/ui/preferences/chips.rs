@@ -215,7 +215,13 @@ const TOOLBAR_ZONES: [Option<ToolbarSide>; 3] =
 impl ToolbarEditor {
     pub(super) fn build(host: &gtk::Box, sender: &ComponentSender<Preferences>) -> Self {
         let heads = [
-            (i18n("Left group"), i18n("Always shown · up to 6")),
+            (
+                i18n("Left group"),
+                crate::i18n::i18n_f(
+                    "Always shown · up to {n}",
+                    &[("n", &crate::config::TOOLBAR_LEFT_MAX.to_string())],
+                ),
+            ),
             (i18n("Right group"), i18n("Folds into ⋯ when narrow")),
             (i18n("Not shown"), i18n("Drop a button here to hide it")),
         ];

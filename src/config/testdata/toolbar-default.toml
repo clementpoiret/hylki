@@ -4,13 +4,13 @@ left = [
     "forward",
     "star",
     "archive",
+    "spam",
     "delete",
 ]
 right = [
     "snooze",
     "tags",
     "read_unread",
-    "spam",
     "move_to",
     "find",
     "print",
@@ -30,3 +30,4 @@ known = [
     "find",
     "print",
 ]
+revision = 1

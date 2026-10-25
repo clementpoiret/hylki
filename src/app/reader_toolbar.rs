@@ -305,7 +305,7 @@ impl AppModel {
                 Some(ToolbarSide::Left) => true,
                 // The compact breakpoint is applied alone, in place of the
                 // fold, and folds the right group all the same.
-                Some(ToolbarSide::Right) => !self.reader_actions_collapsed && !self.reader_compact,
+                Some(ToolbarSide::Right) => !self.right_group_folded(),
                 None => false,
             }
     }
@@ -318,8 +318,13 @@ impl AppModel {
         if self.focus.active(config::FocusPart::ReaderToolbar) {
             return true;
         }
-        (self.reader_actions_collapsed || self.reader_compact)
-            && (self.showing_outbox || !self.reader_toolbar.right.is_empty())
+        self.right_group_folded() && (self.showing_outbox || !self.reader_toolbar.right.is_empty())
+    }
+
+    /// Whether the right group is in the ⋯ menu: by choice, or for want of
+    /// room.
+    fn right_group_folded(&self) -> bool {
+        self.toolbar_fold_right || self.reader_actions_collapsed || self.reader_compact
     }
 
     /// Pack the header's action buttons in the saved order: the left group
@@ -371,7 +376,7 @@ impl AppModel {
     /// row's fixed cost, the window controls, and one button's worth per
     /// shown item (hidden-for-now buttons like Tags without tags count too —
     /// that slack keeps the fold a step ahead of a squeeze).
-    fn refresh_reader_breakpoint(&self) {
+    pub(super) fn refresh_reader_breakpoint(&self) {
         let Some(tb) = self.reader_toolbar_widgets.get() else {
             return;
         };
@@ -455,7 +460,7 @@ impl AppModel {
                 need
             })
         };
-        if self.reader_actions_collapsed {
+        if self.reader_actions_collapsed || self.toolbar_fold_right {
             if let Some(need) = widest(min + gap, &tb.compact_need, &tb.compact_measured) {
                 tracing::info!("reader toolbar: compact below {need}px");
                 tb.compact_breakpoint

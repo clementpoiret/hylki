@@ -168,12 +168,18 @@ impl MessageWindow {
             )));
     }
 
+    /// Whether the right group is in the ⋯ menu: by choice, or for want of
+    /// room.
+    fn right_folded(&self) -> bool {
+        self.fold_right || self.collapsed
+    }
+
     /// The buttons' state: which show (the right group only while the row
     /// fits), and the ones that say the message's state.
     pub(super) fn sync_toolbar(&self) {
         for (item, b) in &self.bar.buttons {
             let right = self.toolbar.right.contains(item);
-            let mut visible = !(right && self.collapsed);
+            let mut visible = !(right && self.right_folded());
             if *item == ToolbarItem::Tags {
                 visible &= !self.tags.is_empty();
             }
@@ -225,7 +231,7 @@ impl MessageWindow {
         }
         self.bar
             .overflow
-            .set_visible(self.collapsed && !self.toolbar.right.is_empty());
+            .set_visible(self.right_folded() && !self.toolbar.right.is_empty());
         let loading = !self.attachments_loading.is_empty();
         self.bar.spinner.set_spinning(loading);
         self.bar.spinner.set_visible(loading);

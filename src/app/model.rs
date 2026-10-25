@@ -165,6 +165,8 @@ pub(crate) struct AppModel {
     /// The pane is too narrow for the left group beside the overflow button
     /// and the window controls at full size: the buttons draw narrower.
     pub(super) reader_compact: bool,
+    /// The right group stays in the ⋯ menu at every width.
+    pub(super) toolbar_fold_right: bool,
     /// The collapsed header's ⋯ button — the anchor its menu pops from.
     pub(super) reader_overflow_btn: gtk::Button,
     /// The reader header's layout: which buttons, which side, what order

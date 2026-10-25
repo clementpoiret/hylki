@@ -5021,8 +5021,8 @@ msgstr "Zum Verschieben ziehen"
 msgid "Left group"
 msgstr "Linke Gruppe"
 
-msgid "Always shown · up to 6"
-msgstr "Immer angezeigt · bis zu 6"
+msgid "Always shown · up to {n}"
+msgstr "Immer angezeigt · bis zu {n}"
 
 msgid "Right group"
 msgstr "Rechte Gruppe"
@@ -7010,6 +7010,9 @@ msgid ""
 msgstr ""
 "Schaltflächen zwischen den Gruppen verschieben. Die rechte Gruppe wird bei "
 "schmaler Anzeigeleiste unter ⋯ zusammengefasst."
+
+msgid "Always fold the right group into ⋯"
+msgstr ""
 
 msgid ""
 "The parts switched on below hide while Focus Mode is on. Activated by "

@@ -120,6 +120,7 @@ impl Component for MessageWindow {
             restorable: init.restorable,
             snooze: init.snooze,
             collapsed: false,
+            fold_right: init.toolbar_fold_right,
             window: root.clone(),
             content: gtk::Overlay::new(),
             bar: Toolbar {
@@ -270,6 +271,10 @@ impl Component for MessageWindow {
                     self.relayout_toolbar();
                     self.sync_toolbar();
                 }
+            }
+            MessageWindowInput::SetToolbarFold(on) => {
+                self.fold_right = on;
+                self.sync_toolbar();
             }
             MessageWindowInput::SetAttachmentDrawer(on) => {
                 self.drawer_enabled = on;

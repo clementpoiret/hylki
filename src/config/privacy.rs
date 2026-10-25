@@ -414,6 +414,11 @@ pub(crate) struct PrivacyFile {
     pub(crate) list_search_bottom: bool,
     #[serde(default)]
     pub(crate) list_bulk_bar_bottom: bool,
+    /// The reader toolbar's right group stays in the ⋯ menu at every
+    /// width. On for a new install; a file from before the key keeps the
+    /// group on the bar while it fits.
+    #[serde(default)]
+    pub(crate) toolbar_fold_right: bool,
     /// The widths columns were dragged to, in pixels, by column name.
     #[serde(default)]
     pub(crate) list_column_widths: std::collections::BTreeMap<String, i32>,
@@ -723,6 +728,7 @@ impl Default for PrivacyFile {
             contacts_search_open: false,
             list_search_bottom: false,
             list_bulk_bar_bottom: false,
+            toolbar_fold_right: true,
             list_column_widths: Default::default(),
             single_key_shortcuts: false,
             gmail_keys: false,

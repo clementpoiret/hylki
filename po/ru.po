@@ -5203,8 +5203,8 @@ msgstr "Перетащите для перемещения"
 msgid "Left group"
 msgstr "Левая группа"
 
-msgid "Always shown · up to 6"
-msgstr "Отображаются всегда · до 6"
+msgid "Always shown · up to {n}"
+msgstr "Отображаются всегда · до {n}"
 
 msgid "Right group"
 msgstr "Правая группа"
@@ -7211,6 +7211,9 @@ msgstr "Панель инструментов"
 msgid ""
 "Drag buttons between the groups. The right group folds into ⋯ when the pane "
 "is narrow."
+msgstr ""
+
+msgid "Always fold the right group into ⋯"
 msgstr ""
 
 msgid ""

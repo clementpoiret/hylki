@@ -5192,8 +5192,8 @@ msgstr "Húzás ide move"
 msgid "Left group"
 msgstr "Bal oldali csoport"
 
-msgid "Always shown · up to 6"
-msgstr "Mindig megjelenítve · legfeljebb 6"
+msgid "Always shown · up to {n}"
+msgstr "Mindig megjelenítve · legfeljebb {n}"
 
 msgid "Right group"
 msgstr "Jobb oldali csoport"
@@ -7229,6 +7229,9 @@ msgstr "Eszköztár"
 msgid ""
 "Drag buttons between the groups. The right group folds into ⋯ when the pane "
 "is narrow."
+msgstr ""
+
+msgid "Always fold the right group into ⋯"
 msgstr ""
 
 msgid ""

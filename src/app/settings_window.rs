@@ -170,6 +170,7 @@ impl AppModel {
             contacts_search_open: self.contacts_search_open,
             list_search_bottom: self.list_search_bottom,
             list_bulk_bar_bottom: self.list_bulk_bar_bottom,
+            toolbar_fold_right: self.toolbar_fold_right,
             single_key_shortcuts: self.single_key.get(),
             gmail_keys: self.gmail_keys.get(),
             keep_downloads_days: self.keep_downloads_days,

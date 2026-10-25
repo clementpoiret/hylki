@@ -20,7 +20,15 @@
   always stays on the bar. The right group of the toolbar takes any number
   of buttons, and folds into the ⋯ menu once it would come within one
   button gap of the left group, measured as drawn; it folded with a wide
-  space still left before. The left group still holds six.
+  space still left before.
+
+- **Changed: the reader toolbar's left group holds seven buttons, and Spam
+  is in it.** Spam sits between Archive and Delete by default. A toolbar
+  whose left group was never changed gets it there too; one arranged by hand
+  keeps Spam where it was. **Settings → Appearance → Always fold the right
+  group into ⋯** keeps the right group in the ⋯ menu at every width. It is
+  on for a new install and off for an existing one, which keeps the group on
+  the bar while it fits.
 
 - **Added: Snooze** (#527, suggested by Bohne13). Snooze, on the reader's
   toolbar, in a message's right-click menu and on z (b with Gmail's keys),

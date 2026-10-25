@@ -359,6 +359,7 @@ impl AppModel {
             contacts_search_open: prefs.contacts_search_open,
             list_search_bottom: prefs.list_search_bottom,
             list_bulk_bar_bottom: prefs.list_bulk_bar_bottom,
+            toolbar_fold_right: prefs.toolbar_fold_right,
             list_column_widths: config::load_list_column_widths(),
             list_wide: config::load_list_pane_width() >= LIST_WIDE_ON,
             shortcuts_win: None,
