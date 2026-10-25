@@ -4438,13 +4438,15 @@ msgstr "Προβολή ανάγνωσης"
 msgid "Loading…"
 msgstr "Φόρτωση…"
 
-#. The fold's tooltips, in the user's language.
 msgid "Show quoted text"
 msgstr "Εμφάνιση παρατιθέμενου κειμένου"
 
-#. The fold's tooltips, in the user's language.
 msgid "Hide quoted text"
 msgstr "Απόκρυψη παρατιθέμενου κειμένου"
+
+#, fuzzy
+msgid "Copy Address"
+msgstr "Αντιγραφή διεύθυνσης συνδέσμου"
 
 msgid "Double-click to open in a new window"
 msgstr "Διπλό κλικ για άνοιγμα σε νέο παράθυρο"

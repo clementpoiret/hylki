@@ -4565,15 +4565,17 @@ msgstr "Olvasó nézet"
 msgid "Loading…"
 msgstr "Betöltés…"
 
-#. The fold's tooltips, in the user's language.
 #, fuzzy
 msgid "Show quoted text"
 msgstr "Távoli tartalom megjelenítése"
 
-#. The fold's tooltips, in the user's language.
 #, fuzzy
 msgid "Hide quoted text"
 msgstr "Elrejtés a preview text"
+
+#, fuzzy
+msgid "Copy Address"
+msgstr "Hivatkozás másolása"
 
 msgid "Double-click to open in a new window"
 msgstr "Kattintson duplán az új ablakban való megnyitáshoz"

@@ -4399,13 +4399,15 @@ msgstr "Vista de lectura"
 msgid "Loading…"
 msgstr "Cargando…"
 
-#. The fold's tooltips, in the user's language.
 msgid "Show quoted text"
 msgstr "Mostrar texto citado"
 
-#. The fold's tooltips, in the user's language.
 msgid "Hide quoted text"
 msgstr "Ocultar texto citado"
+
+#, fuzzy
+msgid "Copy Address"
+msgstr "Copiar dirección del enlace"
 
 msgid "Double-click to open in a new window"
 msgstr "Haz doble clic para abrir en una ventana nueva"

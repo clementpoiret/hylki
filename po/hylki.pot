@@ -4046,12 +4046,13 @@ msgstr ""
 msgid "Loading…"
 msgstr ""
 
-#. The fold's tooltips, in the user's language.
 msgid "Show quoted text"
 msgstr ""
 
-#. The fold's tooltips, in the user's language.
 msgid "Hide quoted text"
+msgstr ""
+
+msgid "Copy Address"
 msgstr ""
 
 msgid "Double-click to open in a new window"

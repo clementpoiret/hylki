@@ -4586,13 +4586,15 @@ msgstr "Режим чтения"
 msgid "Loading…"
 msgstr "Загрузка…"
 
-#. The fold's tooltips, in the user's language.
 msgid "Show quoted text"
 msgstr "Показать цитируемый текст"
 
-#. The fold's tooltips, in the user's language.
 msgid "Hide quoted text"
 msgstr "Скрыть цитируемый текст"
+
+#, fuzzy
+msgid "Copy Address"
+msgstr "Копировать адрес ссылки"
 
 msgid "Double-click to open in a new window"
 msgstr "Дважды щёлкните, чтобы открыть в новом окне"

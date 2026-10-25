@@ -4620,15 +4620,17 @@ msgstr "Widok czytania"
 msgid "Loading…"
 msgstr "Wczytywanie…"
 
-#. The fold's tooltips, in the user's language.
 #, fuzzy
 msgid "Show quoted text"
 msgstr "Wyświetl zdalne treści"
 
-#. The fold's tooltips, in the user's language.
 #, fuzzy
 msgid "Hide quoted text"
 msgstr "Ukrywanie podglądu treści"
+
+#, fuzzy
+msgid "Copy Address"
+msgstr "Adres e-mail"
 
 msgid "Double-click to open in a new window"
 msgstr "Kliknij dwukrotnie, aby otworzyć w nowym oknie"

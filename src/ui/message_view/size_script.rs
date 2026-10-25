@@ -339,12 +339,12 @@ var mn=document.createElement('div');mn.className='hylki-mailmenu';\
 function item(label,fn){var b=document.createElement('button');b.type='button';\
 b.textContent=label;b.addEventListener('click',function(ev){\
 ev.stopPropagation();ev.preventDefault();hideMailMenu();fn();});mn.appendChild(b);}\
-item('New Message',function(){mailMsg(mail);});\
-item('Copy Address',function(){try{window.webkit.messageHandlers.hylki.postMessage('copyaddr:0:0:'+mail);}catch(_){}});\
-item('Add to Contacts',function(){try{window.webkit.messageHandlers.hylki.postMessage('addcontact:0:0:'+mail);}catch(_){}});\
-mn.style.left=Math.max(0,Math.min(x,window.innerWidth-200))+'px';\
-mn.style.top=Math.max(0,Math.min(y,window.innerHeight-124))+'px';\
-document.body.appendChild(mn);window.__hylkiMailMenu=mn;}\
+item(hylkiAM[0],function(){mailMsg(mail);});\
+item(hylkiAM[1],function(){try{window.webkit.messageHandlers.hylki.postMessage('copyaddr:0:0:'+mail);}catch(_){}});\
+item(hylkiAM[2],function(){try{window.webkit.messageHandlers.hylki.postMessage('addcontact:0:0:'+mail);}catch(_){}});\
+document.body.appendChild(mn);window.__hylkiMailMenu=mn;\
+mn.style.left=Math.max(0,Math.min(x,window.innerWidth-mn.offsetWidth))+'px';\
+mn.style.top=Math.max(0,Math.min(y,window.innerHeight-mn.offsetHeight))+'px';}\
 /* The card a right-click at widget point (x, y) belongs to, in a view w\
    widget pixels wide: the one under it, or the nearest when the click fell\
    between cards. And the selected text, for Copy. A right-click anywhere\
