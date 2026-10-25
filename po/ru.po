@@ -5191,7 +5191,8 @@ msgstr "Отображаются всегда · до 6"
 msgid "Right group"
 msgstr "Правая группа"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Сворачиваются в ⋯ при узком окне · до 6"
 
 msgid "Not shown"

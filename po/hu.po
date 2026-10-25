@@ -5180,7 +5180,8 @@ msgstr "Mindig megjelenítve · legfeljebb 6"
 msgid "Right group"
 msgstr "Jobb oldali csoport"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Folds -ba/-be ⋯ amikvagy narrow · up ide 6"
 
 msgid "Not shown"

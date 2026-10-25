@@ -5007,7 +5007,8 @@ msgstr "Toujours affiché · jusqu’à 6"
 msgid "Right group"
 msgstr "Groupe de droite"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Se plie en ⋯ lorsqu’il est étroit · jusqu’à 6"
 
 msgid "Not shown"

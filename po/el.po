@@ -5032,7 +5032,8 @@ msgstr "Πάντα ορατή · έως 6"
 msgid "Right group"
 msgstr "Δεξιά ομάδα"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Συμπτύσσεται στο ⋯ όταν είναι στενή · έως 6"
 
 msgid "Not shown"

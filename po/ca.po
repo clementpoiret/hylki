@@ -4957,7 +4957,8 @@ msgstr "Sempre visible · fins a 6"
 msgid "Right group"
 msgstr "Grup dret"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Es replega a ⋯ quan és estret · fins a 6"
 
 msgid "Not shown"

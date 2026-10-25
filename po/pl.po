@@ -5246,7 +5246,8 @@ msgstr "Zawsze wyświetlane · maksymalnie 6"
 msgid "Right group"
 msgstr "Prawa grupa"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Zwijane do ⋯ przy wąskim oknie · maksymalnie 6"
 
 msgid "Not shown"

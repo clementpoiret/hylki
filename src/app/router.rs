@@ -236,6 +236,8 @@ impl AppModel {
             | AppMsg::ListSortChanged(..)) => self.on_list_header(msg, sender),
             msg @ AppMsg::OwnGravatarFetched { .. } => self.on_identity(msg),
             msg @ (AppMsg::SetReaderActionsCollapsed(..)
+            | AppMsg::SetReaderLeftCollapsed(..)
+            | AppMsg::MeasureReaderFold
             | AppMsg::ReaderControlsChanged(..)
             | AppMsg::ReaderOverflowMenu
             | AppMsg::ReaderToolbarMenu { .. }

@@ -4984,7 +4984,8 @@ msgstr "Sempre mostrado · até 6"
 msgid "Right group"
 msgstr "Grupo direito"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Recolhido no menu ⋯ quando há pouco espaço · até 6"
 
 msgid "Not shown"

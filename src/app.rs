@@ -489,7 +489,8 @@ impl SimpleComponent for AppModel {
                                         add_css_class: "flat",
                                         #[watch]
                                         set_visible: model.showing_outbox
-                                            && model.reader_compose.is_none(),
+                                            && model.reader_compose.is_none()
+                                            && !model.reader_left_collapsed,
                                         #[watch]
                                         set_sensitive: model.current.is_some(),
                                         connect_clicked[sender] => move |_| sender.input(AppMsg::EditCurrentOutbox),
@@ -506,7 +507,8 @@ impl SimpleComponent for AppModel {
                                         add_css_class: "flat",
                                         #[watch]
                                         set_visible: model.showing_outbox
-                                            && model.reader_compose.is_none(),
+                                            && model.reader_compose.is_none()
+                                            && !model.reader_left_collapsed,
                                         #[watch]
                                         set_sensitive: model.current.is_some(),
                                         connect_clicked[sender] => move |_| sender.input(AppMsg::SendCurrentOutbox),
@@ -522,7 +524,8 @@ impl SimpleComponent for AppModel {
                                         add_css_class: "flat",
                                         #[watch]
                                         set_visible: model.showing_outbox
-                                            && model.reader_compose.is_none(),
+                                            && model.reader_compose.is_none()
+                                            && !model.reader_left_collapsed,
                                         connect_clicked[sender] => move |_| sender.input(AppMsg::RetryAllOutbox),
                                     },
                                 },
@@ -756,8 +759,7 @@ impl SimpleComponent for AppModel {
                                     gtk::Button {
                                         add_css_class: "flat",
                                         #[watch]
-                                        set_visible: !model.showing_outbox && !model.reader_actions_collapsed
-                                            && model.reader_compose.is_none(),
+                                        set_visible: model.toolbar_visible(config::ToolbarItem::ReadUnread),
                                         // The icon shows the ACTION (read envelope =
                                         // "mark as read"), matching the menus.
                                         #[watch]

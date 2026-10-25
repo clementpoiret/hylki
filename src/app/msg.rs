@@ -768,6 +768,11 @@ pub(crate) enum AppMsg {
     /// The reader pane crossed the actions breakpoint (true = collapse the
     /// header's buttons into the overflow menu).
     SetReaderActionsCollapsed(bool),
+    /// The reader pane crossed the second breakpoint (true = the left group
+    /// folds into the overflow menu too).
+    SetReaderLeftCollapsed(bool),
+    /// Measure what the folded row needs, now that it is drawn.
+    MeasureReaderFold,
     /// The window controls were re-measured (decoration layout changed).
     ReaderControlsChanged(i32),
     /// The collapsed header's ⋯ button was clicked — pop its menu.

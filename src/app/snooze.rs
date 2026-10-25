@@ -18,8 +18,8 @@ use crate::worker::MailRequest;
 
 use super::demo::demo_mode;
 use super::model::AppModel;
-use super::removal::MoveGroups;
 use super::msg::AppMsg;
+use super::removal::MoveGroups;
 
 /// How long a wake is given before it is asked for again: an answer lost
 /// with a dropped connection must not leave the mail asleep for good, and a

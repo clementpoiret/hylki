@@ -31,6 +31,13 @@ pub(super) struct ReaderToolbarWidgets {
     spinner: gtk::Widget,
     bin: adw::BreakpointBin,
     breakpoint: adw::Breakpoint,
+    /// The second fold: below this the left group goes into the ⋯ menu as
+    /// well, or the window controls would be pushed off the pane.
+    left_breakpoint: adw::Breakpoint,
+    /// What the folded row (left group, ⋯, window controls) needs, and
+    /// whether that was measured rather than estimated.
+    left_need: std::cell::Cell<i32>,
+    left_measured: std::cell::Cell<bool>,
     /// The row's cost with every action button gone (padding, spacing…).
     base: i32,
     /// One action button's natural width.
@@ -109,7 +116,9 @@ impl AppModel {
     /// enabled under the same conditions. The left group never folds.
     fn show_reader_overflow_menu(&self, sender: &ComponentSender<Self>) {
         let has_current = self.current.is_some();
-        let focus = self.focus.active(config::FocusPart::ReaderToolbar);
+        // A pane too narrow for the left group folds it in as Focus Mode does.
+        let focus =
+            self.focus.active(config::FocusPart::ReaderToolbar) || self.reader_left_collapsed;
         let sections = if self.showing_outbox {
             self.outbox_overflow_sections(has_current, focus, sender)
         } else {
@@ -289,8 +298,11 @@ impl AppModel {
         self.reader_compose.is_none()
             && (item == config::ToolbarItem::Delete || !self.showing_outbox)
             && match self.reader_toolbar.side(item) {
-                Some(ToolbarSide::Left) => true,
-                Some(ToolbarSide::Right) => !self.reader_actions_collapsed,
+                Some(ToolbarSide::Left) => !self.reader_left_collapsed,
+                // The second fold is applied alone, in place of the first.
+                Some(ToolbarSide::Right) => {
+                    !self.reader_actions_collapsed && !self.reader_left_collapsed
+                }
                 None => false,
             }
     }
@@ -300,7 +312,7 @@ impl AppModel {
     /// Outbox keeps View Source there regardless).
     pub(super) fn reader_overflow_wanted(&self) -> bool {
         // Focus Mode folds the whole row in, so the ⋯ is the toolbar.
-        if self.focus.active(config::FocusPart::ReaderToolbar) {
+        if self.focus.active(config::FocusPart::ReaderToolbar) || self.reader_left_collapsed {
             return true;
         }
         self.reader_actions_collapsed
@@ -372,13 +384,55 @@ impl AppModel {
             tb.base,
             tb.controls.get()
         );
-        tb.breakpoint
-            .set_condition(Some(&adw::BreakpointCondition::new_length(
-                adw::BreakpointConditionLengthType::MaxWidth,
-                threshold,
-                adw::LengthUnit::Px,
-            )));
+        tb.breakpoint.set_condition(Some(&max_width(threshold)));
+        // Until the folded row is measured, a generous estimate: each button
+        // with the headerbar's spacing, and its padding at both ends.
+        let left = (self.reader_toolbar.left.len() + 1) as i32;
+        let estimate = left * (tb.button_w.max(36) + 6) + tb.controls.get() + 48;
+        tb.left_measured.set(false);
+        tb.left_need.set(estimate);
+        tb.left_breakpoint
+            .set_condition(Some(&max_width(f64::from(estimate))));
         tb.bin.queue_resize();
+        let s = self.self_sender.clone();
+        self.after_paint(move || {
+            let _ = s.send(AppMsg::MeasureReaderFold);
+        });
+    }
+
+    /// The second fold's width, from the folded row as it is drawn: only
+    /// with the right group folded and the left group still on the bar.
+    /// The widest seen since the layout last changed counts, so the
+    /// Outbox's shorter row cannot lower it.
+    fn measure_reader_fold(&self) {
+        let (Some(header), Some(tb)) =
+            (self.reader_header.get(), self.reader_toolbar_widgets.get())
+        else {
+            return;
+        };
+        if !self.reader_actions_collapsed
+            || self.reader_left_collapsed
+            || self.reader_compose.is_some()
+            || self.focus.active(config::FocusPart::ReaderToolbar)
+        {
+            return;
+        }
+        // The minimum, not the natural width: a headerbar's natural width
+        // keeps its title centred, as wide again as its wider side, while
+        // the buttons only collide below the two sides side by side.
+        let need = header.measure(gtk::Orientation::Horizontal, -1).0 + 8;
+        let need = if tb.left_measured.get() {
+            need.max(tb.left_need.get())
+        } else {
+            need
+        };
+        tb.left_measured.set(true);
+        if need != tb.left_need.get() {
+            tracing::info!("reader toolbar: the left group folds below {need}px");
+            tb.left_need.set(need);
+            tb.left_breakpoint
+                .set_condition(Some(&max_width(f64::from(need))));
+        }
     }
 
     /// Tooltip for the toolbar's trash button: says when it will delete the
@@ -397,7 +451,21 @@ impl AppModel {
                 self.reader_actions_collapsed = on;
                 self.reader_overflow_btn
                     .set_visible(self.reader_overflow_wanted());
+                if on {
+                    let s = sender.input_sender().clone();
+                    self.after_paint(move || {
+                        let _ = s.send(AppMsg::MeasureReaderFold);
+                    });
+                }
             }
+
+            AppMsg::SetReaderLeftCollapsed(on) => {
+                self.reader_left_collapsed = on;
+                self.reader_overflow_btn
+                    .set_visible(self.reader_overflow_wanted());
+            }
+
+            AppMsg::MeasureReaderFold => self.measure_reader_fold(),
 
             AppMsg::ReaderControlsChanged(controls) => {
                 if let Some(tb) = self.reader_toolbar_widgets.get() {
@@ -492,8 +560,15 @@ impl AppModel {
         } else {
             (full - controls - packed_sum).max(0)
         };
-        let bp = reader_actions_breakpoint(sender);
+        let bp = fold_breakpoint(
+            sender,
+            READER_ACTIONS_BREAKPOINT,
+            AppMsg::SetReaderActionsCollapsed,
+        );
         widgets.reader_bin.add_breakpoint(bp.clone());
+        // Added last: where both match, the bin applies this one alone.
+        let left_bp = fold_breakpoint(sender, 0.0, AppMsg::SetReaderLeftCollapsed);
+        widgets.reader_bin.add_breakpoint(left_bp.clone());
         let _ = self.reader_toolbar_widgets.set(ReaderToolbarWidgets {
             buttons,
             outbox: vec![
@@ -504,6 +579,9 @@ impl AppModel {
             spinner: widgets.tb_spinner.clone().upcast(),
             bin: widgets.reader_bin.clone(),
             breakpoint: bp,
+            left_breakpoint: left_bp,
+            left_need: std::cell::Cell::new(0),
+            left_measured: std::cell::Cell::new(false),
             base,
             button_w,
             controls: std::cell::Cell::new(controls),
@@ -602,21 +680,30 @@ fn button_widths(buttons: &[(config::ToolbarItem, gtk::Widget)]) -> (i32, i32) {
     (packed_sum, button_w)
 }
 
-/// The breakpoint that folds the reader's actions away, saying so to the
-/// app as it applies and unapplies.
-fn reader_actions_breakpoint(sender: &ComponentSender<AppModel>) -> adw::Breakpoint {
-    let bp = adw::Breakpoint::new(adw::BreakpointCondition::new_length(
+/// A pane narrower than `px`.
+fn max_width(px: f64) -> adw::BreakpointCondition {
+    adw::BreakpointCondition::new_length(
         adw::BreakpointConditionLengthType::MaxWidth,
-        READER_ACTIONS_BREAKPOINT,
+        px,
         adw::LengthUnit::Px,
-    ));
+    )
+}
+
+/// A breakpoint that folds reader actions away below `px`, saying so to the
+/// app with `msg` as it applies and unapplies.
+fn fold_breakpoint(
+    sender: &ComponentSender<AppModel>,
+    px: f64,
+    msg: fn(bool) -> AppMsg,
+) -> adw::Breakpoint {
+    let bp = adw::Breakpoint::new(max_width(px));
     let s = sender.input_sender().clone();
     bp.connect_apply(move |_| {
-        let _ = s.send(AppMsg::SetReaderActionsCollapsed(true));
+        let _ = s.send(msg(true));
     });
     let s = sender.input_sender().clone();
     bp.connect_unapply(move |_| {
-        let _ = s.send(AppMsg::SetReaderActionsCollapsed(false));
+        let _ = s.send(msg(false));
     });
     bp
 }

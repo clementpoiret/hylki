@@ -5133,7 +5133,8 @@ msgstr "Sempre visibile · fino a 6"
 msgid "Right group"
 msgstr "Gruppo destra"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Si comprime in ⋯ quando stretto · fino a 6"
 
 msgid "Not shown"

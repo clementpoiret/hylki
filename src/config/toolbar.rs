@@ -118,8 +118,11 @@ pub(crate) enum ToolbarSide {
     Right,
 }
 
-/// How many buttons one side of the reader toolbar holds at most.
-pub(crate) const TOOLBAR_SIDE_MAX: usize = 7;
+/// How many buttons the left side of the reader toolbar holds at most. The
+/// left group never folds, so it has to fit the narrowest reader with the
+/// overflow button beside it. The right group has no limit: it folds into
+/// the overflow menu before it can reach the left one.
+pub(crate) const TOOLBAR_LEFT_MAX: usize = 6;
 
 /// The buttons there were before toolbar.toml listed the ones it knew of:
 /// a file without that list knew these, and any other is new to it.
@@ -196,19 +199,18 @@ impl ReaderToolbar {
         let mut seen = std::collections::HashSet::new();
         self.left.retain(|i| seen.insert(*i));
         self.right.retain(|i| seen.insert(*i));
-        self.left.truncate(TOOLBAR_SIDE_MAX);
-        self.right.truncate(TOOLBAR_SIDE_MAX);
+        self.left.truncate(TOOLBAR_LEFT_MAX);
     }
 
     /// Whether `side` has room for one more button that is not already on
-    /// it (`None`, the hidden zone, always has).
+    /// it: only the left side can be full.
     pub(crate) fn has_room(&self, side: Option<ToolbarSide>, item: ToolbarItem) -> bool {
-        let list = match side {
-            Some(ToolbarSide::Left) => &self.left,
-            Some(ToolbarSide::Right) => &self.right,
-            None => return true,
-        };
-        list.contains(&item) || list.len() < TOOLBAR_SIDE_MAX
+        match side {
+            Some(ToolbarSide::Left) => {
+                self.left.contains(&item) || self.left.len() < TOOLBAR_LEFT_MAX
+            }
+            Some(ToolbarSide::Right) | None => true,
+        }
     }
 
     /// Take `item` out of wherever it is and put it at `index` of `side`
@@ -316,8 +318,7 @@ mod toolbar_tests {
     #[test]
     fn place_moves_between_and_within_sides() {
         let mut t = ReaderToolbar::default();
-        t.place(ToolbarItem::Snooze, Some(ToolbarSide::Left), 99);
-        // The left group is full: a move onto it changes nothing.
+        // The default left group is full: a move onto it changes nothing.
         t.place(ToolbarItem::Print, Some(ToolbarSide::Left), 0);
         assert_eq!(t.left[0], ToolbarItem::Reply);
         assert_eq!(t.right.last(), Some(&ToolbarItem::Print));
@@ -329,19 +330,21 @@ mod toolbar_tests {
         // Within the left group: Reply (now index 1) to the end.
         t.place(ToolbarItem::Reply, Some(ToolbarSide::Left), 99);
         assert_eq!(t.left.last(), Some(&ToolbarItem::Reply));
-        assert_eq!(t.left.len(), TOOLBAR_SIDE_MAX);
+        assert_eq!(t.left.len(), TOOLBAR_LEFT_MAX);
         // Hidden: on neither side, listed under hidden().
-        t.place(ToolbarItem::Snooze, None, 0);
         t.place(ToolbarItem::Spam, None, 0);
         assert_eq!(t.side(ToolbarItem::Spam), None);
-        assert_eq!(
-            t.hidden(),
-            vec![ToolbarItem::Star, ToolbarItem::Snooze, ToolbarItem::Spam]
-        );
+        assert_eq!(t.hidden(), vec![ToolbarItem::Star, ToolbarItem::Spam]);
         // Back from hidden into the right group's middle.
         t.place(ToolbarItem::Spam, Some(ToolbarSide::Right), 1);
         assert_eq!(t.right[1], ToolbarItem::Spam);
-        assert_eq!(t.hidden(), vec![ToolbarItem::Star, ToolbarItem::Snooze]);
+        assert_eq!(t.hidden(), vec![ToolbarItem::Star]);
+        // The right group takes every button there is.
+        for item in ToolbarItem::ALL {
+            t.place(item, Some(ToolbarSide::Right), 99);
+        }
+        assert!(t.left.is_empty());
+        assert_eq!(t.right.len(), ToolbarItem::ALL.len());
     }
 
     #[test]

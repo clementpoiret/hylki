@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Fixed: a narrow reader pushed the window buttons off the window.** With
+  minimize, maximize and close all shown, the reader's left group of
+  buttons, the ⋯ menu and the window buttons were wider than the narrowest
+  reader, and the close button went past the edge. Below the width that row
+  needs, measured as it is drawn, the left group now folds into the ⋯ menu
+  as well. The right group of the toolbar takes any number of buttons; the
+  left group still holds six.
+
 - **Added: Snooze** (#527, suggested by Bohne13). Snooze, on the reader's
   toolbar, in a message's right-click menu and on z (b with Gmail's keys),
   puts a message away until this evening, tomorrow, the weekend or a date

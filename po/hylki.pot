@@ -4606,7 +4606,7 @@ msgstr ""
 msgid "Right group"
 msgstr ""
 
-msgid "Folds into ⋯ when narrow · up to 6"
+msgid "Folds into ⋯ when narrow"
 msgstr ""
 
 msgid "Not shown"

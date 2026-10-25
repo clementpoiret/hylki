@@ -5009,7 +5009,8 @@ msgstr "Immer angezeigt · bis zu 6"
 msgid "Right group"
 msgstr "Rechte Gruppe"
 
-msgid "Folds into ⋯ when narrow · up to 6"
+#, fuzzy
+msgid "Folds into ⋯ when narrow"
 msgstr "Falten in ⋯ wenn schmal · bis zu 6"
 
 msgid "Not shown"
