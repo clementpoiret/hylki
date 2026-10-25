@@ -8,7 +8,7 @@ use crate::config;
 use crate::i18n::{i18n, i18n_f};
 use crate::models::{FolderKind, Message};
 use crate::ui::context_menu::{show_context_menu, MenuEntry};
-use crate::ui::message_actions::MessageAction;
+use crate::ui::message_actions::{KeysOf, MessageAction};
 use crate::ui::preferences::PrefInput;
 
 use super::model::AppModel;
@@ -218,6 +218,7 @@ impl AppModel {
         };
         let item = |action: MessageAction, msg: fn() -> AppMsg, enabled: bool| {
             action_entry(sender, action.label(), action.icon(), msg, enabled)
+                .keys(action.keys(KeysOf::Main))
         };
         let mut sections = Vec::new();
         for group in groups {
@@ -238,7 +239,8 @@ impl AppModel {
                         if self.snooze_offered() {
                             section.push(
                                 MenuEntry::submenu(A::Snooze.label(), self.snooze_sections(sender))
-                                    .icon(format!("{}-symbolic", A::Snooze.icon())),
+                                    .icon(format!("{}-symbolic", A::Snooze.icon()))
+                                    .keys(A::Snooze.keys(KeysOf::Main)),
                             );
                         }
                     }
@@ -267,7 +269,8 @@ impl AppModel {
                         if let Some(entries) = self.reader_tag_entries(sender) {
                             section.push(
                                 MenuEntry::submenu(A::Tags.label(), vec![entries])
-                                    .icon("tag-outline-symbolic"),
+                                    .icon("tag-outline-symbolic")
+                                    .keys(A::Tags.keys(KeysOf::Main)),
                             );
                         }
                     }

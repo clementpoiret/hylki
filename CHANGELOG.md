@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Added: the keys beside a message's menu entries.** The reader toolbar's
+  ⋯ menu, the right-click menus of a message in the list and in the reader,
+  and the menu for several selected messages show the key that does each
+  entry: the single key while single-key shortcuts are on, Gmail's with
+  Gmail keys, and otherwise Ctrl+R, Ctrl+Shift+R, Ctrl+U, Ctrl+F,
+  Ctrl+Shift+P and Delete.
+
 - **Fixed: the line above a quoted reply was always English** (#528,
   reported by samuel-edlmeier). "On …, … wrote:" and the forwarded message
   header (From, Date, Subject) were not in the translations, and are now.

@@ -84,6 +84,7 @@ impl AppModel {
             show_accounts_action,
             focus_action,
         } = main_menu;
+        crate::ui::keymap::set_key_mode(prefs.single_key_shortcuts, prefs.gmail_keys);
         let launcher_badge = prefs.launcher_badge();
         let remember_sidebar = prefs.remember_sidebar;
         let remember_rail = prefs.remember_rail;

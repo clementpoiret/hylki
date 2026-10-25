@@ -8,6 +8,10 @@ Single-key shortcuts**.
 Press **Ctrl+?** (or F1, or *Main Menu → Keyboard Shortcuts*) at any time for
 this list in the app; the same key closes it again.
 
+The reader toolbar's ⋯ menu and a message's right-click menus, in the list
+and in the reader, show the key beside each entry that has one: the single key while single-key shortcuts are on (Gmail's with Gmail
+keys), otherwise the Ctrl key where there is one.
+
 | Move around | | Act on a message | |
 | --- | --- | --- | --- |
 | <kbd>j</kbd> <kbd>↓</kbd> | Next message | <kbd>r</kbd> | Reply |

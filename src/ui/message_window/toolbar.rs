@@ -6,7 +6,7 @@ use super::MessageWindow;
 use crate::config::ToolbarItem;
 use crate::i18n::i18n;
 use crate::ui::context_menu::{show_context_menu, MenuEntry};
-use crate::ui::message_actions::MessageAction;
+use crate::ui::message_actions::{KeysOf, MessageAction};
 use adw::prelude::*;
 use relm4::prelude::*;
 
@@ -309,6 +309,7 @@ impl MessageWindow {
                 let _ = s.send(msg());
             })
             .icon(format!("{}-symbolic", action.icon()))
+            .keys(action.keys(KeysOf::Popout))
         };
         let mut section = Vec::new();
         for item in &self.toolbar.right {
@@ -338,7 +339,8 @@ impl MessageWindow {
                                 A::Snooze.label(),
                                 self.snooze_entries(snoozed, sender),
                             )
-                            .icon("alarm-symbolic"),
+                            .icon("alarm-symbolic")
+                            .keys(A::Snooze.keys(KeysOf::Popout)),
                         );
                     }
                 }
@@ -365,7 +367,8 @@ impl MessageWindow {
                     if !self.tags.is_empty() {
                         section.push(
                             MenuEntry::submenu(A::Tags.label(), vec![self.tag_entries(sender)])
-                                .icon("tag-outline-symbolic"),
+                                .icon("tag-outline-symbolic")
+                                .keys(A::Tags.keys(KeysOf::Popout)),
                         );
                     }
                 }

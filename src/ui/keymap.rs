@@ -113,6 +113,35 @@ pub(crate) enum GoTarget {
     Contacts,
 }
 
+/// Which single keys are on, for the key hints in the menus.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum KeyMode {
+    Off,
+    Single,
+    Gmail,
+}
+
+thread_local! {
+    /// What Settings has on, kept by the app as it changes, so a menu built
+    /// anywhere names the keys that work.
+    static KEY_MODE: std::cell::Cell<KeyMode> = const { std::cell::Cell::new(KeyMode::Off) };
+}
+
+/// Note the single-key settings for the menus' hints. Gmail's keys need
+/// single keys on as well.
+pub(crate) fn set_key_mode(single: bool, gmail: bool) {
+    let mode = match (single, gmail) {
+        (false, _) => KeyMode::Off,
+        (true, false) => KeyMode::Single,
+        (true, true) => KeyMode::Gmail,
+    };
+    KEY_MODE.with(|m| m.set(mode));
+}
+
+pub(crate) fn key_mode() -> KeyMode {
+    KEY_MODE.with(|m| m.get())
+}
+
 /// The shortcut for a key press, if any. `shift` distinguishes `r` from `R`.
 pub(crate) fn shortcut_for(key: gtk::gdk::Key, shift: bool) -> Option<Shortcut> {
     use gtk::gdk::Key;
