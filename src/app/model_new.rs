@@ -115,6 +115,7 @@ impl AppModel {
             morph_pending: None,
             self_sender: sender.input_sender().clone(),
             provisionals: HashMap::new(),
+            sent_files: HashMap::new(),
             draining_composers: Vec::new(),
             reader_split_top: {
                 let r = gtk::Revealer::new();

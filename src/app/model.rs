@@ -29,7 +29,7 @@ use super::list_header::ListHeaderWidgets;
 use super::msg::AppMsg;
 use super::popout::PopOut;
 use super::reader_toolbar::ReaderToolbarWidgets;
-use super::send_morph::{MorphPending, Provisional};
+use super::send_morph::{MorphPending, Provisional, SentFile};
 use super::tags::TagScan;
 use super::transfer::{Transfer, TransferTally};
 use super::types::{FolderMessages, SelectedFolder, UnifiedView};
@@ -87,6 +87,9 @@ pub(crate) struct AppModel {
     /// The cards standing in for replies sent from here until their copies
     /// are read back from Sent, by (account, id).
     pub(super) provisionals: HashMap<(u32, u32), Provisional>,
+    /// The files each reply sent from here went with, by its card, which
+    /// lists them until its copy's own attachments are read back.
+    pub(super) sent_files: HashMap<(u32, u32), Vec<SentFile>>,
     /// Superseded inline composers still finishing a save-if-dirty before closing.
     pub(super) draining_composers: Vec<(u32, Controller<Compose>)>,
     /// SlideDown revealer under the reader toolbar that hosts the inline pane.

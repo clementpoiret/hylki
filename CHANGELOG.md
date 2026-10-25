@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Fixed: a sent reply's card showed its attachments only once the copy
+  was back from Sent.** A reply sent from the split pane lists its files on
+  its card from the moment it becomes one, and they open from there before
+  the copy is read back.
+
 - **Added: the keys beside a message's menu entries.** The reader toolbar's
   ⋯ menu, the right-click menus of a message in the list and in the reader,
   and the menu for several selected messages show the key that does each
