@@ -212,8 +212,10 @@ fn split_lines(parent: &Handle, dir: Dir) {
     let kids: Vec<Handle> = parent.children.borrow().clone();
     let mut out: Vec<Handle> = Vec::with_capacity(kids.len());
     let mut line: Vec<Handle> = Vec::new();
-    let end = |line: &mut Vec<Handle>, br: Option<Handle>, out: &mut Vec<Handle>| {
-        match first_strong_in(line, true) {
+    let end =
+        |line: &mut Vec<Handle>, br: Option<Handle>, out: &mut Vec<Handle>| match first_strong_in(
+            line, true,
+        ) {
             Some(d) if d != dir => {
                 let holder = new_div();
                 set_dir(&holder, d);
@@ -228,8 +230,7 @@ fn split_lines(parent: &Handle, dir: Dir) {
                 out.append(line);
                 out.extend(br);
             }
-        }
-    };
+        };
     for kid in kids {
         match name_of(&kid).as_deref() {
             Some("br") => end(&mut line, Some(kid), &mut out),

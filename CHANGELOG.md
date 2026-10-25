@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Fixed: a pale account color left the reader's account chip hard to
+  read** (#530, reported by samuel-edlmeier). The chip's text keeps the
+  account color but is darkened on a light theme, or lightened on a dark
+  one, until it reaches a 4.5:1 contrast with the chip.
+
 - **Fixed: a sent reply's card showed its attachments only once the copy
   was back from Sent.** A reply sent from the split pane lists its files on
   its card from the moment it becomes one, and they open from there before

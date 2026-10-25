@@ -23,13 +23,23 @@ pub(crate) fn stored_template(text: &str) -> String {
 /// The header for a reply to mail from `name` <`address`> sent at `ts`, from
 /// `template` ("" for the default). `label` is the date to show when the
 /// message's own date could not be read.
-pub(crate) fn attribution(template: &str, name: &str, address: &str, ts: i64, label: &str) -> String {
+pub(crate) fn attribution(
+    template: &str,
+    name: &str,
+    address: &str,
+    ts: i64,
+    label: &str,
+) -> String {
     let template = if template.trim().is_empty() {
         default_template()
     } else {
         template.trim().to_string()
     };
-    let name = if name.trim().is_empty() { address } else { name };
+    let name = if name.trim().is_empty() {
+        address
+    } else {
+        name
+    };
     let (date, time) = if ts > 0 {
         (crate::datefmt::day_month_year(ts), crate::datefmt::time(ts))
     } else {
@@ -59,7 +69,13 @@ mod tests {
             format!("On {date} at {time}, Ada wrote:")
         );
         assert_eq!(
-            attribution(" {name} <{address}>, {date}, {time}: ", "Ada", "ada@x.org", ts, ""),
+            attribution(
+                " {name} <{address}>, {date}, {time}: ",
+                "Ada",
+                "ada@x.org",
+                ts,
+                ""
+            ),
             format!("Ada <ada@x.org>, {date}, {time}:")
         );
         // No name: the address stands in for it.

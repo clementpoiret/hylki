@@ -468,7 +468,11 @@ impl AppModel {
                         let prefill = if what == WindowCompose::Reply {
                             reply_prefill(&m, &self.reply_header)
                         } else {
-                            reply_all_prefill(&m, &self.own_identities(m.account_id), &self.reply_header)
+                            reply_all_prefill(
+                                &m,
+                                &self.own_identities(m.account_id),
+                                &self.reply_header,
+                            )
                         };
                         self.open_compose(m.account_id, self.reply_context(&m, prefill), &sender);
                     }
