@@ -7,7 +7,8 @@
   and the menu for several selected messages show the key that does each
   entry: the single key while single-key shortcuts are on, Gmail's with
   Gmail keys, and otherwise Ctrl+R, Ctrl+Shift+R, Ctrl+U, Ctrl+F,
-  Ctrl+Shift+P and Delete.
+  Ctrl+Shift+P and Delete. With single keys on, every Tags menu shows the
+  number key beside each of the first nine tags.
 
 - **Fixed: the line above a quoted reply was always English** (#528,
   reported by samuel-edlmeier). "On …, … wrote:" and the forwarded message

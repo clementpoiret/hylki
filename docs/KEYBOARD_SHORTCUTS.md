@@ -10,7 +10,8 @@ this list in the app; the same key closes it again.
 
 The reader toolbar's ⋯ menu and a message's right-click menus, in the list
 and in the reader, show the key beside each entry that has one: the single key while single-key shortcuts are on (Gmail's with Gmail
-keys), otherwise the Ctrl key where there is one.
+keys), otherwise the Ctrl key where there is one. With single keys on, each
+of the first nine tags in a Tags menu shows its number.
 
 | Move around | | Act on a message | |
 | --- | --- | --- | --- |

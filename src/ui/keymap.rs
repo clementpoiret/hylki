@@ -142,6 +142,16 @@ pub(crate) fn key_mode() -> KeyMode {
     KEY_MODE.with(|m| m.get())
 }
 
+/// The number key for the tag at `index` in Settings order (#157), for a
+/// menu's hint: the first nine have one, while single keys are on.
+pub(crate) fn tag_key(index: usize) -> Option<&'static str> {
+    const DIGITS: [&str; 9] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    match key_mode() {
+        KeyMode::Off => None,
+        KeyMode::Single | KeyMode::Gmail => DIGITS.get(index).copied(),
+    }
+}
+
 /// The shortcut for a key press, if any. `shift` distinguishes `r` from `R`.
 pub(crate) fn shortcut_for(key: gtk::gdk::Key, shift: bool) -> Option<Shortcut> {
     use gtk::gdk::Key;
