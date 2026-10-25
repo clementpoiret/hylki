@@ -176,6 +176,9 @@ msgstr ""
 msgid "Archive"
 msgstr ""
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr ""
 
@@ -1153,6 +1156,9 @@ msgstr ""
 
 msgid ""
 "The smart folder goes from the sidebar. The mail it shows stays where it is."
+msgstr ""
+
+msgid "Snooze until"
 msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
@@ -2926,12 +2932,6 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-msgid "That time has passed"
-msgstr ""
-
-msgid "Choose a time later than now."
-msgstr ""
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr ""
 
@@ -3785,6 +3785,21 @@ msgid_plural "{n} messages"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Later today ({time})"
+msgstr ""
+
+msgid "Saturday morning ({time})"
+msgstr ""
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr ""
+
+msgid "Choose a time later than now."
+msgstr ""
+
 msgid "the portal answered response code {code}"
 msgstr ""
 
@@ -3915,6 +3930,9 @@ msgid "Remove star"
 msgstr ""
 
 msgid "Forwarded"
+msgstr ""
+
+msgid "Snoozed until {when}"
 msgstr ""
 
 msgid "High importance"
@@ -6319,6 +6337,9 @@ msgid "For Gmail and others that file sent mail themselves."
 msgstr ""
 
 msgid "Templates"
+msgstr ""
+
+msgid "Snoozed"
 msgstr ""
 
 msgid "Hidden Folders"

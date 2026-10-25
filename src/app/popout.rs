@@ -360,6 +360,11 @@ impl AppModel {
             },
             in_junk: folder_kind == Some(FolderKind::Junk),
             restorable: matches!(folder_kind, Some(FolderKind::Trash | FolderKind::Junk)),
+            snooze: if init_from_file {
+                None
+            } else {
+                self.snooze_offer(account_id, folder_kind)
+            },
             content_dark: self.message_theme.dark_override(),
             reader_style: self.reader_style(),
             reader_mode: self.effective_reader_mode(),

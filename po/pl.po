@@ -192,6 +192,9 @@ msgstr "Przenieś do…"
 msgid "Archive"
 msgstr "Archiwizuj"
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr "Blokuj zdalne treści"
 
@@ -1320,6 +1323,9 @@ msgstr "Czy opróżnić katalog „{name}”?"
 
 msgid ""
 "The smart folder goes from the sidebar. The mail it shows stays where it is."
+msgstr ""
+
+msgid "Snooze until"
 msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
@@ -3339,12 +3345,6 @@ msgstr "Wyślij później"
 msgid "Schedule"
 msgstr "Zaplanuj"
 
-msgid "That time has passed"
-msgstr "Ten czas już minął"
-
-msgid "Choose a time later than now."
-msgstr "Wybierz godzinę w przyszłości."
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr ""
 
@@ -4316,6 +4316,23 @@ msgstr[0] "{n} wiadomość"
 msgstr[1] "{n} wiadomości"
 msgstr[2] "{n} wiadomości"
 
+#, fuzzy
+msgid "Later today ({time})"
+msgstr "Dzisiaj, {time}"
+
+#, fuzzy
+msgid "Saturday morning ({time})"
+msgstr "W poniedziałek rano ({time})"
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr "Ten czas już minął"
+
+msgid "Choose a time later than now."
+msgstr "Wybierz godzinę w przyszłości."
+
 msgid "the portal answered response code {code}"
 msgstr "portal zwrócił kod odpowiedzi {code}"
 
@@ -4467,6 +4484,10 @@ msgstr "Usuń gwiazdkę"
 #, fuzzy
 msgid "Forwarded"
 msgstr "Przekaż dalej"
+
+#, fuzzy
+msgid "Snoozed until {when}"
+msgstr "Zaplanowano na {when}"
 
 msgid "High importance"
 msgstr ""
@@ -7132,6 +7153,9 @@ msgstr ""
 "powyższe zapisywanie kopii."
 
 msgid "Templates"
+msgstr ""
+
+msgid "Snoozed"
 msgstr ""
 
 msgid "Hidden Folders"

@@ -41,11 +41,30 @@ impl MessageList {
         let move_entry = self.move_entry(msg, x, y, sender);
         flag_section.extend(self.read_entry(msg, sender, &item));
         let tag_section = self.tag_section(msg, sender);
+        let mut move_section = self.move_section(move_entry, &item);
+        if let Some(snoozed) = self.snooze_offer {
+            let s = sender.clone();
+            let m = msg.clone();
+            let conversation = conversation.clone();
+            let menu = crate::ui::later::snooze_menu(snoozed, move |choice| {
+                let _ = s.output(MessageListOutput::Action {
+                    action: RowAction::Snooze(choice),
+                    message: Box::new(m.clone()),
+                    conversation: conversation.clone(),
+                });
+            });
+            // After Archive, as on the toolbar.
+            let at = move_section.len().saturating_sub(1);
+            move_section.insert(
+                at,
+                MenuEntry::submenu(i18n("Snooze"), menu).icon("alarm-symbolic"),
+            );
+        }
         let sections = vec![
             self.reply_section(&item),
             flag_section,
             tag_section,
-            self.move_section(move_entry, &item),
+            move_section,
             vec![
                 item(
                     RowAction::AddContact,
@@ -524,6 +543,17 @@ impl MessageList {
                     &i18n("Archive"),
                     "mail-archive-symbolic",
                 ));
+                if let Some(snoozed) = self.snooze_offer {
+                    let messages = self.selected_conversations();
+                    let s = sender.clone();
+                    let menu = crate::ui::later::snooze_menu(snoozed, move |choice| {
+                        let _ = s.output(MessageListOutput::Snooze {
+                            messages: messages.clone(),
+                            choice,
+                        });
+                    });
+                    section.push(MenuEntry::submenu(i18n("Snooze"), menu).icon("alarm-symbolic"));
+                }
                 section.push(item(
                     BulkAction::Delete,
                     &i18n("Delete"),

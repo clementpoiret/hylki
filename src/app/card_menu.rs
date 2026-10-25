@@ -272,6 +272,18 @@ impl AppModel {
             );
         }
         acts.push(item(RowAction::Archive, i18n("Archive"), "mail-archive"));
+        // Snooze (#527): the card's message alone, as its other actions.
+        if let Some(snoozed) = self.snooze_offer(m.account_id, kind) {
+            let s = sender.input_sender().clone();
+            let message = m.clone();
+            let menu = crate::ui::later::snooze_menu(snoozed, move |choice| {
+                let _ = s.send(AppMsg::SnoozeMessages {
+                    messages: vec![message.clone()],
+                    choice,
+                });
+            });
+            acts.push(MenuEntry::submenu(i18n("Snooze"), menu).icon("alarm-symbolic"));
+        }
         acts.push(item(RowAction::Delete, i18n("Delete"), "user-trash"));
         acts
     }

@@ -188,6 +188,9 @@ msgstr "Déplacer vers…"
 msgid "Archive"
 msgstr "Archiver"
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr "Bloquer le contenu distant"
 
@@ -1236,6 +1239,9 @@ msgid ""
 msgstr ""
 "Le dossier intelligent disparaît de la barre latérale. Les messages qu’il "
 "affiche restent là où ils sont."
+
+msgid "Snooze until"
+msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
 msgid_plural "{n} messages could not be moved to {account}: {error}"
@@ -3180,12 +3186,6 @@ msgstr "Envoyer plus tard"
 msgid "Schedule"
 msgstr "Programmer"
 
-msgid "That time has passed"
-msgstr "Cette heure est déjà passée"
-
-msgid "Choose a time later than now."
-msgstr "Choisissez une heure ultérieure à maintenant."
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr ""
 "Le champ De doit contenir une seule adresse, par exemple Anne "
@@ -4124,6 +4124,23 @@ msgid_plural "{n} messages"
 msgstr[0] "{n} message"
 msgstr[1] "{n} messages"
 
+#, fuzzy
+msgid "Later today ({time})"
+msgstr "Aujourd’hui, {time}"
+
+#, fuzzy
+msgid "Saturday morning ({time})"
+msgstr "Lundi matin ({time})"
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr "Cette heure est déjà passée"
+
+msgid "Choose a time later than now."
+msgstr "Choisissez une heure ultérieure à maintenant."
+
 msgid "the portal answered response code {code}"
 msgstr "le portail a répondu avec le code {code}"
 
@@ -4267,6 +4284,10 @@ msgstr "Retirer l’étoile"
 
 msgid "Forwarded"
 msgstr "Transféré"
+
+#, fuzzy
+msgid "Snoozed until {when}"
+msgstr "Programmé pour {when}"
 
 msgid "High importance"
 msgstr "Importance haute"
@@ -6836,6 +6857,9 @@ msgstr "Pour Gmail et les services qui classent eux-mêmes le courrier envoyé."
 
 msgid "Templates"
 msgstr "Modèles"
+
+msgid "Snoozed"
+msgstr ""
 
 msgid "Hidden Folders"
 msgstr "Dossiers masqués"

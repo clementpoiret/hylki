@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- **Added: Snooze** (#527, suggested by Bohne13). Snooze, on the reader's
+  toolbar, in a message's right-click menu and on z (b with Gmail's keys),
+  puts a message away until this evening, tomorrow, the weekend or a date
+  and time of your own. It waits in the account's Snoozed
+  folder on the server, made the first time, and comes back to the folder it
+  came from, unread, at that time, or as soon as a reply arrives. In the
+  Snoozed folder each message shows when it comes back, a new time can be
+  chosen, and Unsnooze brings it back now. The times are kept in
+  `snoozed.toml`, and the mail comes back while Hylki is running or when it
+  next starts. A move on JMAP or Microsoft 365 to a folder the account does
+  not have yet now makes it, as IMAP did.
+
 - **Added: a search for other people's OpenPGP keys** (#432, suggested by
   3v1n0). A keyring of a hundred keys or more was one long list in
   Settings → OpenPGP. Other people's keys are now sorted by name, and a

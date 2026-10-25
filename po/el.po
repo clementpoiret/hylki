@@ -189,6 +189,9 @@ msgstr "Μετακίνηση σε…"
 msgid "Archive"
 msgstr "Αρχειοθέτηση"
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr "Αποκλεισμός απομακρυσμένου περιεχομένου"
 
@@ -1243,6 +1246,9 @@ msgid ""
 msgstr ""
 "Ο έξυπνος φάκελος αφαιρείται από την πλευρική στήλη. Τα μηνύματα που "
 "εμφανίζει παραμένουν στη θέση τους."
+
+msgid "Snooze until"
+msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
 msgid_plural "{n} messages could not be moved to {account}: {error}"
@@ -3206,12 +3212,6 @@ msgstr "Αποστολή αργότερα"
 msgid "Schedule"
 msgstr "Προγραμματισμός"
 
-msgid "That time has passed"
-msgstr "Αυτή η ώρα έχει παρέλθει"
-
-msgid "Choose a time later than now."
-msgstr "Επιλέξτε ώρα μεταγενέστερη από την τρέχουσα."
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr ""
 "Το πεδίο αποστολέα πρέπει να περιέχει μία διεύθυνση, όπως Ann "
@@ -4150,6 +4150,23 @@ msgid_plural "{n} messages"
 msgstr[0] "{n} μήνυμα"
 msgstr[1] "{n} μηνύματα"
 
+#, fuzzy
+msgid "Later today ({time})"
+msgstr "Σήμερα, {time}"
+
+#, fuzzy
+msgid "Saturday morning ({time})"
+msgstr "Δευτέρα πρωί ({time})"
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr "Αυτή η ώρα έχει παρέλθει"
+
+msgid "Choose a time later than now."
+msgstr "Επιλέξτε ώρα μεταγενέστερη από την τρέχουσα."
+
 msgid "the portal answered response code {code}"
 msgstr "η πύλη απάντησε με κωδικό απόκρισης {code}"
 
@@ -4292,6 +4309,10 @@ msgstr "Αφαίρεση αστεριού"
 
 msgid "Forwarded"
 msgstr "Προωθήθηκε"
+
+#, fuzzy
+msgid "Snoozed until {when}"
+msgstr "Προγραμματισμένο για {when}"
 
 msgid "High importance"
 msgstr "Υψηλή σημασία"
@@ -6886,6 +6907,9 @@ msgstr ""
 
 msgid "Templates"
 msgstr "Πρότυπα"
+
+msgid "Snoozed"
+msgstr ""
 
 msgid "Hidden Folders"
 msgstr "Κρυφοί φάκελοι"

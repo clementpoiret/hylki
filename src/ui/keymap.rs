@@ -53,6 +53,8 @@ pub(crate) enum Shortcut {
     Undo,
     /// Gmail's v: the Move To picker.
     MoveTo,
+    /// Gmail's b (z here): the Snooze menu (#527).
+    Snooze,
     /// Gmail's l: the tag menu.
     Label,
     /// Gmail's g then a letter.
@@ -86,6 +88,7 @@ impl Shortcut {
                 | Shortcut::MarkRead(_)
                 | Shortcut::MarkUnreadFrom
                 | Shortcut::MoveTo
+                | Shortcut::Snooze
                 | Shortcut::Label
                 | Shortcut::Tag(_)
                 | Shortcut::ClearTags
@@ -130,6 +133,9 @@ pub(crate) fn shortcut_for(key: gtk::gdk::Key, shift: bool) -> Option<Shortcut> 
         Key::exclam => Shortcut::Spam,
         Key::s => Shortcut::Star,
         Key::m => Shortcut::ToggleRead,
+        // b steps back through a conversation here: Gmail's key for it is
+        // taken.
+        Key::z => Shortcut::Snooze,
         Key::c => Shortcut::Compose,
         Key::slash => Shortcut::Search,
         Key::question => Shortcut::Shortcuts,
@@ -180,6 +186,7 @@ pub(crate) fn gmail_shortcut_for(key: gtk::gdk::Key, shift: bool) -> Option<Shor
         Key::colon => Shortcut::FoldAll(true),
         Key::z => Shortcut::Undo,
         Key::v => Shortcut::MoveTo,
+        Key::b => Shortcut::Snooze,
         Key::l => Shortcut::Label,
         Key::bracketright | Key::braceright => Shortcut::ArchiveAndStep(1),
         Key::bracketleft | Key::braceleft => Shortcut::ArchiveAndStep(-1),
@@ -445,8 +452,11 @@ mod tests {
         assert_eq!(shortcut_for(Key::KP_5, false), Some(Shortcut::Tag(5)));
         assert_eq!(shortcut_for(Key::_9, false), Some(Shortcut::Tag(9)));
         assert_eq!(shortcut_for(Key::_0, false), Some(Shortcut::ClearTags));
+        // z snoozes (#527): b, Gmail's key, steps through a conversation.
+        assert_eq!(shortcut_for(Key::z, false), Some(Shortcut::Snooze));
+        assert_eq!(gmail_shortcut_for(Key::b, false), Some(Shortcut::Snooze));
         // Anything unmapped is left to the widget with focus.
-        assert_eq!(shortcut_for(Key::z, false), None);
+        assert_eq!(shortcut_for(Key::q, false), None);
         assert_eq!(shortcut_for(Key::Return, false), None);
         assert_eq!(shortcut_for(Key::space, false), None);
     }

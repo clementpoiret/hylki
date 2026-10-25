@@ -1380,6 +1380,17 @@ flowbox.attach-flow > flowboxchild {
   opacity: 0.5;
 }
 
+/* Snoozed mail (#527): when it comes back, in the accent, where the date
+   would be. */
+.message-date.snoozed {
+  color: @accent_color;
+  opacity: 1;
+}
+
+.message-list > row:selected .message-date.snoozed {
+  color: white;
+}
+
 .dim-icon,
 .star-icon {
   opacity: 0.6;

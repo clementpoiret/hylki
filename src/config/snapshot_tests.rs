@@ -391,11 +391,7 @@ path = "INBOX"
 
 #[test]
 fn toolbar_toml() {
-    let layout = ReaderToolbar::default();
-    let file = ToolbarFile {
-        left: layout.left.iter().map(|i| i.key().to_string()).collect(),
-        right: layout.right.iter().map(|i| i.key().to_string()).collect(),
-    };
+    let file = ToolbarFile::of(&ReaderToolbar::default());
     assert_golden("config/testdata/toolbar-default.toml", &pretty(&file));
 }
 

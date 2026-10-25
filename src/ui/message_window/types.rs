@@ -32,6 +32,8 @@ pub(crate) struct MessageWindowInit {
     /// (Move to Inbox is offered).
     pub(crate) in_junk: bool,
     pub(crate) restorable: bool,
+    /// Whether Snooze is offered (#527), and Unsnooze (`Some(true)`).
+    pub(crate) snooze: Option<bool>,
     /// Message-content theme override (`None` follows the system).
     pub(crate) content_dark: Option<bool>,
     /// The reader's own fonts and colors over the senders' (#56).
@@ -165,6 +167,8 @@ pub(crate) enum MessageWindowInput {
         y: f64,
     },
     TagMenu,
+    /// The Snooze menu, under its button (or the ⋯), #527.
+    SnoozeMenu,
     OverflowMenu,
     Find,
     /// A single-key shortcut pressed in this window (#392).

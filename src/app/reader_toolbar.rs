@@ -220,6 +220,15 @@ impl AppModel {
                         many,
                     )),
                     T::Archive => section.push(item(A::Archive, || AppMsg::Archive, many)),
+                    // Snooze (#527): its times behind a submenu, as Tags.
+                    T::Snooze => {
+                        if self.snooze_offered() {
+                            section.push(
+                                MenuEntry::submenu(A::Snooze.label(), self.snooze_sections(sender))
+                                    .icon(format!("{}-symbolic", A::Snooze.icon())),
+                            );
+                        }
+                    }
                     T::Delete => section.push(item(A::Delete, || AppMsg::Delete, many)),
                     T::Spam => section.push(item(
                         if self.target_in_junk() {
@@ -505,7 +514,7 @@ impl AppModel {
         self.connect_toolbar_menus(sender);
     }
 
-    /// The overflow, Tags and Move To buttons open their menus.
+    /// The overflow, Tags, Move To and Snooze buttons open their menus.
     fn connect_toolbar_menus(&self, sender: &ComponentSender<Self>) {
         let s = sender.input_sender().clone();
         self.reader_overflow_btn.connect_clicked(move |_| {
@@ -518,6 +527,10 @@ impl AppModel {
         let s = sender.input_sender().clone();
         self.reader_move_btn.connect_clicked(move |_| {
             let _ = s.send(AppMsg::MoveToMenu);
+        });
+        let s = sender.input_sender().clone();
+        self.reader_snooze_btn.connect_clicked(move |_| {
+            let _ = s.send(AppMsg::SnoozeMenu);
         });
     }
 }
@@ -546,6 +559,7 @@ fn toolbar_buttons(widgets: &AppModelWidgets) -> Vec<(config::ToolbarItem, gtk::
         (T::Forward, widgets.tb_forward.clone().upcast()),
         (T::Star, widgets.tb_star.clone().upcast()),
         (T::Archive, widgets.tb_archive.clone().upcast()),
+        (T::Snooze, widgets.tb_snooze.clone().upcast()),
         (T::Delete, widgets.tb_delete.clone().upcast()),
         (T::Spam, widgets.tb_spam.clone().upcast()),
         (T::ReadUnread, widgets.tb_read.clone().upcast()),

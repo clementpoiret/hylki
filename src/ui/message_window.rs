@@ -45,6 +45,7 @@ pub(crate) struct MessageWindow {
     toolbar: ReaderToolbar,
     in_junk: bool,
     restorable: bool,
+    snooze: Option<bool>,
     /// The right group is folded into the ⋯ menu: the window is too narrow
     /// for the whole row.
     collapsed: bool,

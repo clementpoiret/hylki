@@ -530,6 +530,30 @@ pub(crate) enum AppMsg {
     /// its list (#407).
     DeleteFromAddress { account_id: u32, addr: String },
 
+    // ---- on_snooze (snooze.rs) ----
+    /// Snooze what the reader's actions act on until this time (#527).
+    Snooze(i64),
+    /// Bring it back now, out of the Snoozed folder.
+    Unsnooze,
+    /// The calendar, for a time of one's own.
+    PickSnoozeTime,
+    /// A Snooze menu's choice for these messages: a row's, a selection's,
+    /// a pop-out's.
+    SnoozeMessages {
+        messages: Vec<Message>,
+        choice: crate::ui::later::SnoozeChoice,
+    },
+    /// The Snooze menu, under the toolbar's button (the keyboard's way in).
+    SnoozeMenu,
+    /// The clock: bring back the mail whose time has come.
+    WakeSnoozed,
+    /// A worker's answer to `MailRequest::Unsnooze`.
+    Unsnoozed {
+        account_id: u32,
+        message_ids: Vec<String>,
+        done: bool,
+    },
+
     // ---- on_workers (workers.rs) ----
     /// Check every account for new mail now.
     Refresh,

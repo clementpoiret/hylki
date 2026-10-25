@@ -22,6 +22,7 @@ this list in the app; the same key closes it again.
 | | | <kbd>1</kbd> … <kbd>9</kbd> | Add or remove a tag (the first nine, in Settings order) |
 | | | <kbd>0</kbd> | Remove every tag |
 | | | <kbd>D</kbd> | Delete permanently, without going to Trash |
+| | | <kbd>z</kbd> | Snooze |
 
 <kbd>w</kbd> and <kbd>b</kbd> step through the cards of the conversation you
 are reading, opening a folded one; outside a conversation they move along the
@@ -54,6 +55,7 @@ followed by another goes somewhere.
 | <kbd>Shift+N</kbd> | Check for new mail | <kbd>*</kbd> <kbd>r</kbd> / <kbd>*</kbd> <kbd>u</kbd> | Select the read or the unread conversations |
 | <kbd>?</kbd> | This list | <kbd>*</kbd> <kbd>s</kbd> / <kbd>*</kbd> <kbd>t</kbd> | Select the starred or the unstarred conversations |
 | | | <kbd>v</kbd> | Move to a folder |
+| | | <kbd>b</kbd> | Snooze |
 | | | <kbd>l</kbd> | Tags |
 | | | <kbd>z</kbd> | Undo |
 | | | <kbd>Shift+R</kbd> <kbd>Shift+A</kbd> <kbd>Shift+F</kbd> | Reply, reply to all or forward in a window |

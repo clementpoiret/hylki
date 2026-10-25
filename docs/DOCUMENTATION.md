@@ -270,7 +270,7 @@ They are stored on the account as `hidden_folders` in `accounts.toml`.
 
 An Exchange server lists its calendar, contacts, tasks, notes and journal
 folders over IMAP as if they were mail folders, along with Outbox, Sync
-Issues, Conversation History, Scheduled and Snoozed. Hylki hides these the
+Issues, Conversation History and Scheduled. Hylki hides these the
 first time it lists such an account, and only when the listing looks like
 Exchange (at least two of Calendar, Contacts, Tasks and Journal at the top
 level), so a "Notes" folder on any other server is left alone. The look is
@@ -999,6 +999,37 @@ While it waits and while it is being sent, the message is listed in the
 **Outbox**, where **Edit** and **Delete** bring it back to the composer and
 **Send** sends it without waiting. Quitting Hylki before the wait is over
 keeps it in the Outbox, and it is sent at the next start.
+
+### Snoozing mail
+
+**Snooze** puts a message away until a time you choose, then moves it back
+to the folder it came from, unread. It is on the reader's toolbar, in a
+message's right-click menu, and on <kbd>z</kbd> with single-key shortcuts
+(<kbd>b</kbd> with Gmail's keys). The menu offers this evening, tomorrow
+morning and afternoon, Saturday and Monday morning, and **Pick a date and
+time…** for any other. A conversation's row snoozes the conversation, as
+much of it as is in that folder; a card picked in the reader snoozes that
+message alone.
+
+The message waits in the account's **Snoozed** folder on the server, so a
+phone or another mail program sees it leave the Inbox too. The folder is
+made the first time something is snoozed; on Gmail it is a label. In the
+Snoozed folder each message shows when it comes back in place of its date.
+A time chosen there replaces the old one, and **Unsnooze** brings the
+message back now. A reply that arrives in the conversation brings it back
+early. **Undo** (Ctrl+Z) right after a snooze puts the message back where it
+was.
+
+The times are kept on this computer, in `snoozed.toml`, and Hylki moves the
+mail back itself: snoozed mail comes back while Hylki is running, or as soon
+as it starts after its time. Hylki on another computer does not know the
+time, and leaves the message in the Snoozed folder; **Unsnooze** there moves
+it to the Inbox.
+
+A folder called Snoozed, at the top of the account or under the Inbox, is
+taken for the role. Any other is chosen in the account's **Special
+Folders**, under **Snoozed**. Drafts and templates cannot be snoozed, and
+neither can mail on a POP3 account, which has no folder to keep it in.
 
 ### Templates
 

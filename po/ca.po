@@ -186,6 +186,9 @@ msgstr "Mou a…"
 msgid "Archive"
 msgstr "Arxiva"
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr "Bloca el contingut remot"
 
@@ -1224,6 +1227,9 @@ msgid ""
 msgstr ""
 "La carpeta intel·ligent desapareixerà de la barra lateral. El correu que "
 "mostra es queda on és."
+
+msgid "Snooze until"
+msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
 msgid_plural "{n} messages could not be moved to {account}: {error}"
@@ -3144,12 +3150,6 @@ msgstr "Envia més tard"
 msgid "Schedule"
 msgstr "Programa"
 
-msgid "That time has passed"
-msgstr "Aquesta hora ja ha passat"
-
-msgid "Choose a time later than now."
-msgstr "Tria una hora posterior a ara."
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr "El remitent ha de ser una sola adreça, com ara Ann <ann@example.com>."
 
@@ -4081,6 +4081,23 @@ msgid_plural "{n} messages"
 msgstr[0] "{n} missatge"
 msgstr[1] "{n} missatges"
 
+#, fuzzy
+msgid "Later today ({time})"
+msgstr "Avui, {time}"
+
+#, fuzzy
+msgid "Saturday morning ({time})"
+msgstr "Dilluns al matí ({time})"
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr "Aquesta hora ja ha passat"
+
+msgid "Choose a time later than now."
+msgstr "Tria una hora posterior a ara."
+
 msgid "the portal answered response code {code}"
 msgstr "el portal ha respost amb el codi de resposta {code}"
 
@@ -4219,6 +4236,10 @@ msgstr "Treu la destacat"
 
 msgid "Forwarded"
 msgstr "Reenviat"
+
+#, fuzzy
+msgid "Snoozed until {when}"
+msgstr "Programat per a {when}"
 
 msgid "High importance"
 msgstr "Importància alta"
@@ -6775,6 +6796,9 @@ msgstr "Per al Gmail i altres que arxiven ells mateixos el correu enviat."
 
 msgid "Templates"
 msgstr "Plantilles"
+
+msgid "Snoozed"
+msgstr ""
 
 msgid "Hidden Folders"
 msgstr "Carpetes amagades"

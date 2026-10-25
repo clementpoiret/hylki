@@ -193,6 +193,9 @@ msgstr "Áthelyezés ide…"
 msgid "Archive"
 msgstr "Archiválás"
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr "Távoli képek blokkolása"
 
@@ -1295,6 +1298,9 @@ msgstr "Kiüríti ezt: „{name}”?"
 
 msgid ""
 "The smart folder goes from the sidebar. The mail it shows stays where it is."
+msgstr ""
+
+msgid "Snooze until"
 msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
@@ -3295,12 +3301,6 @@ msgstr "Küldés később"
 msgid "Schedule"
 msgstr "Ütemezés"
 
-msgid "That time has passed"
-msgstr "Ez az időpont már elmúlt"
-
-msgid "Choose a time later than now."
-msgstr "Válasszon a jelenleginél későbbi időpontot."
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr ""
 
@@ -4262,6 +4262,23 @@ msgid_plural "{n} messages"
 msgstr[0] "{n} üzenet"
 msgstr[1] "{n} üzenet"
 
+#, fuzzy
+msgid "Later today ({time})"
+msgstr "Ma, {time}"
+
+#, fuzzy
+msgid "Saturday morning ({time})"
+msgstr "Hétfő reggel ({time})"
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr "Ez az időpont már elmúlt"
+
+msgid "Choose a time later than now."
+msgstr "Válasszon a jelenleginél későbbi időpontot."
+
 msgid "the portal answered response code {code}"
 msgstr "a portál a {code} válasz kódot adta vissza"
 
@@ -4413,6 +4430,10 @@ msgstr "Csillag eltávolítása"
 #, fuzzy
 msgid "Forwarded"
 msgstr "Továbbítás"
+
+#, fuzzy
+msgid "Snoozed until {when}"
+msgstr "Ütemezve ekkorra: {when}"
 
 msgid "High importance"
 msgstr ""
@@ -7069,6 +7090,9 @@ msgstr ""
 "kiküldött leveleket. Letiltja a fenti „Másolat mentése” opciót."
 
 msgid "Templates"
+msgstr ""
+
+msgid "Snoozed"
 msgstr ""
 
 msgid "Hidden Folders"

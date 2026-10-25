@@ -190,6 +190,9 @@ msgstr "Mover para…"
 msgid "Archive"
 msgstr "Arquivar"
 
+msgid "Snooze"
+msgstr ""
+
 msgid "Block Remote Content"
 msgstr "Bloquear conteúdo remoto"
 
@@ -1239,6 +1242,9 @@ msgid ""
 msgstr ""
 "A pasta de pesquisa é removida da barra lateral. As mensagens que mostra "
 "permanecem onde estão."
+
+msgid "Snooze until"
+msgstr ""
 
 msgid "One message could not be moved to {account}: {error}"
 msgid_plural "{n} messages could not be moved to {account}: {error}"
@@ -3171,12 +3177,6 @@ msgstr "Enviar mais tarde"
 msgid "Schedule"
 msgstr "Agendar"
 
-msgid "That time has passed"
-msgstr "Essa hora já passou"
-
-msgid "Choose a time later than now."
-msgstr "Escolha uma hora posterior à atual."
-
 msgid "The From has to be one address, such as Ann <ann@example.com>."
 msgstr ""
 "O campo De tem de conter um único endereço, como Ann <ann@example.com>."
@@ -4108,6 +4108,23 @@ msgid_plural "{n} messages"
 msgstr[0] "{n} mensagem"
 msgstr[1] "{n} mensagens"
 
+#, fuzzy
+msgid "Later today ({time})"
+msgstr "Hoje, {time}"
+
+#, fuzzy
+msgid "Saturday morning ({time})"
+msgstr "Segunda-feira de manhã ({time})"
+
+msgid "Unsnooze"
+msgstr ""
+
+msgid "That time has passed"
+msgstr "Essa hora já passou"
+
+msgid "Choose a time later than now."
+msgstr "Escolha uma hora posterior à atual."
+
 msgid "the portal answered response code {code}"
 msgstr "o portal devolveu o código de resposta {code}"
 
@@ -4247,6 +4264,10 @@ msgstr "Remover estrela"
 
 msgid "Forwarded"
 msgstr "Reencaminhada"
+
+#, fuzzy
+msgid "Snoozed until {when}"
+msgstr "Agendada para {when}"
 
 msgid "High importance"
 msgstr "Importância alta"
@@ -6813,6 +6834,9 @@ msgstr ""
 
 msgid "Templates"
 msgstr "Modelos"
+
+msgid "Snoozed"
+msgstr ""
 
 msgid "Hidden Folders"
 msgstr "Pastas ocultas"

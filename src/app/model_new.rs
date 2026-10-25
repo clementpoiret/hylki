@@ -191,6 +191,12 @@ impl AppModel {
                 b.add_css_class("flat");
                 b
             },
+            reader_snooze_btn: {
+                let b = gtk::Button::from_icon_name("alarm-symbolic");
+                b.set_tooltip_text(Some(i18n("Snooze").as_str()));
+                b.add_css_class("flat");
+                b
+            },
             reader_move_btn: {
                 let b = gtk::Button::from_icon_name("folder-symbolic");
                 b.set_tooltip_text(Some(i18n("Move To…").as_str()));
@@ -532,6 +538,9 @@ impl AppModel {
             showing_contacts: false,
             showing_outbox: false,
             outbox_by_account: HashMap::new(),
+            snoozed: super::snooze::load_snoozed(),
+            snooze_waking: HashMap::new(),
+            snooze_until: None,
             server_identities: HashMap::new(),
             unified_emit_queued: std::cell::Cell::new(false),
             unified_dirty: std::cell::Cell::new(false),

@@ -172,6 +172,8 @@ pub(crate) struct AppModel {
     pub(super) reader_toolbar_widgets: std::cell::OnceCell<ReaderToolbarWidgets>,
     /// The toolbar's tag button (#71) — the anchor its menu pops from.
     pub(super) reader_tag_btn: gtk::Button,
+    /// The toolbar's Snooze button (#527), the anchor its menu pops from.
+    pub(super) reader_snooze_btn: gtk::Button,
     /// The reader toolbar's Move To… button (#164): the folder picker
     /// anchors to it.
     pub(super) reader_move_btn: gtk::Button,
@@ -783,6 +785,14 @@ pub(crate) struct AppModel {
     pub(super) showing_outbox: bool,
     /// Messages waiting to be sent, per account, as last reported by its worker.
     pub(super) outbox_by_account: HashMap<u32, Vec<crate::models::OutboxItem>>,
+    /// Snoozed mail (#527), as snoozed.toml keeps it.
+    pub(super) snoozed: Vec<config::Snooze>,
+    /// Snoozed mail a worker has been asked to bring back, by (account
+    /// address, Message-ID), with when to ask again if no answer comes.
+    pub(super) snooze_waking: HashMap<(String, String), std::time::Instant>,
+    /// The time a Snooze of the list's selection is for, while the list
+    /// resolves which messages that is.
+    pub(super) snooze_until: Option<i64>,
     /// The sending identities a JMAP server keeps, per account (#346):
     /// offered as From addresses beside the account's own aliases.
     pub(super) server_identities: HashMap<u32, Vec<(String, String)>>,
