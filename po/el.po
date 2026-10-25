@@ -1075,9 +1075,6 @@ msgstr "(χωρίς θέμα)"
 msgid "Message Source"
 msgstr "Πηγαίος κώδικας μηνύματος"
 
-msgid "On {date}, {name} wrote:"
-msgstr ""
-
 #, fuzzy
 msgid "Forwarded message"
 msgstr "Προώθηση αυτού του μηνύματος"
@@ -1553,6 +1550,10 @@ msgid "A new message with {n} file attached is open in Hylki."
 msgid_plural "A new message with {n} files attached is open in Hylki."
 msgstr[0] "Ένα νέο μήνυμα με {n} συνημμένο αρχείο είναι ανοικτό στο Hylki."
 msgstr[1] "Ένα νέο μήνυμα με {n} συνημμένα αρχεία είναι ανοικτό στο Hylki."
+
+#, fuzzy
+msgid "On {date} at {time}, {name} wrote:"
+msgstr "{date} στις {time}"
 
 msgid "GnuPG (gpg) is not installed, so this message cannot be read."
 msgstr ""
@@ -7177,6 +7178,21 @@ msgstr "Αναίρεση αποστολής"
 
 msgid "How long Undo is offered after sending."
 msgstr "Για πόσο χρόνο είναι διαθέσιμη η αναίρεση μετά την αποστολή."
+
+#, fuzzy
+msgid "Reply Header"
+msgstr "Διεύθυνση απάντησης"
+
+msgid "{name}, {address}, {date} and {time} are filled in from the original."
+msgstr ""
+
+#, fuzzy
+msgid "Line above the quoted message"
+msgstr "Πάνω από το παρατιθέμενο μήνυμα"
+
+#, fuzzy
+msgid "Restore Default"
+msgstr "Επαναφορά προεπιλογών"
 
 msgid "Spelling"
 msgstr "Ορθογραφία"

@@ -7,7 +7,9 @@
   header (From, Date, Subject) were not in the translations, and are now.
   Both give the full date and time of the original; a reply to mail from
   the same day said only the time. The signature still goes above the quote
-  in a Markdown reply or forward whatever the language.
+  in a Markdown reply or forward whatever the language. Settings →
+  Composing → Reply Header sets a line of your own, with `{name}`,
+  `{address}`, `{date}` and `{time}` filled in from the original.
 
 - **Fixed: a narrow reader pushed the window buttons off the window.** With
   minimize, maximize and close all shown, the reader's left group of

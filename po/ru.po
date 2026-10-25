@@ -1147,9 +1147,6 @@ msgstr "(без темы)"
 msgid "Message Source"
 msgstr "Исходный текст сообщения"
 
-msgid "On {date}, {name} wrote:"
-msgstr ""
-
 #, fuzzy
 msgid "Forwarded message"
 msgstr "Переслать это сообщение"
@@ -1642,6 +1639,10 @@ msgid_plural "A new message with {n} files attached is open in Hylki."
 msgstr[0] "Новое письмо с {n} прикрёпленным файлом открыто в Hylki."
 msgstr[1] "Новое письмо с {n} прикрёпленными файлами открыто в Hylki."
 msgstr[2] "Новое письмо с {n} прикрёпленными файлами открыто в Hylki."
+
+#, fuzzy
+msgid "On {date} at {time}, {name} wrote:"
+msgstr "{date} в {time}"
 
 msgid "GnuPG (gpg) is not installed, so this message cannot be read."
 msgstr "GnuPG (gpg) не установлен, поэтому это сообщение нельзя прочитать."
@@ -7346,6 +7347,21 @@ msgstr "Отменить"
 
 msgid "How long Undo is offered after sending."
 msgstr ""
+
+#, fuzzy
+msgid "Reply Header"
+msgstr "Адрес для ответа"
+
+msgid "{name}, {address}, {date} and {time} are filled in from the original."
+msgstr ""
+
+#, fuzzy
+msgid "Line above the quoted message"
+msgstr "Над цитируемым сообщением"
+
+#, fuzzy
+msgid "Restore Default"
+msgstr "Восстановить по умолчанию"
 
 msgid "Spelling"
 msgstr "Орфография"

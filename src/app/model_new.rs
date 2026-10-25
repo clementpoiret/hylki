@@ -513,6 +513,7 @@ impl AppModel {
             reply_position: prefs.reply_position,
             signature_position: prefs.signature_position,
             signature_dashes: prefs.signature_dashes,
+            reply_header: prefs.reply_header,
             undo_send_secs: prefs.undo_send_secs,
             spellcheck: prefs.spellcheck,
             spellcheck_langs: prefs.spellcheck_langs,

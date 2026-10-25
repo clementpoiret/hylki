@@ -1060,9 +1060,6 @@ msgstr "(sense assumpte)"
 msgid "Message Source"
 msgstr "Codi font del missatge"
 
-msgid "On {date}, {name} wrote:"
-msgstr ""
-
 #, fuzzy
 msgid "Forwarded message"
 msgstr "Reenvia aquest missatge"
@@ -1532,6 +1529,10 @@ msgid "A new message with {n} file attached is open in Hylki."
 msgid_plural "A new message with {n} files attached is open in Hylki."
 msgstr[0] "Hi ha un missatge nou amb {n} fitxer adjunt obert a l'Hylki."
 msgstr[1] "Hi ha un missatge nou amb {n} fitxers adjunts obert a l'Hylki."
+
+#, fuzzy
+msgid "On {date} at {time}, {name} wrote:"
+msgstr "{date} a les {time}"
 
 msgid "GnuPG (gpg) is not installed, so this message cannot be read."
 msgstr ""
@@ -7054,6 +7055,21 @@ msgstr "Desfés l'enviament"
 
 msgid "How long Undo is offered after sending."
 msgstr "Quant de temps s'ofereix desfer després d'enviar."
+
+#, fuzzy
+msgid "Reply Header"
+msgstr "Adreça de resposta"
+
+msgid "{name}, {address}, {date} and {time} are filled in from the original."
+msgstr ""
+
+#, fuzzy
+msgid "Line above the quoted message"
+msgstr "A sobre del missatge citat"
+
+#, fuzzy
+msgid "Restore Default"
+msgstr "Restaura els valors per defecte"
 
 msgid "Spelling"
 msgstr "Ortografia"

@@ -5,6 +5,7 @@ use crate::i18n::{i18n, i18n_f};
 use crate::models::Message;
 use crate::ui::compose::ComposePrefill;
 
+use crate::mail::attribution::attribution;
 use crate::mail::quote::{body_is_plain_text, escaped_lines, quoted_original};
 
 /// A reply's subject: the original's, with one "Re:" in front.
@@ -16,9 +17,11 @@ pub(super) fn reply_subject(subject: &str) -> String {
     }
 }
 
-pub(super) fn reply_prefill(m: &Message) -> ComposePrefill {
+/// `header` is the line above the quote as Settings has it, "" for the
+/// default (#528).
+pub(super) fn reply_prefill(m: &Message, header: &str) -> ComposePrefill {
     let subject = reply_subject(&m.subject);
-    let attribution = attribution(m);
+    let attribution = attribution(header, &m.from_name, &m.from_addr, m.timestamp, &m.date);
     ComposePrefill {
         // A Reply-To header is the sender saying "answer me here instead" —
         // a mailing list, a no-reply address with a monitored counterpart. It
@@ -47,28 +50,13 @@ pub(super) fn reply_prefill(m: &Message) -> ComposePrefill {
     }
 }
 
-/// The line above a reply's quote, in the app's language (#528), with the
-/// full date: the list's label says "14:03" for mail from today, which
-/// tells the reader of the reply nothing a day later.
-fn attribution(m: &Message) -> String {
-    let name = if m.from_name.trim().is_empty() {
-        &m.from_addr
-    } else {
-        &m.from_name
-    };
-    i18n_f(
-        "On {date}, {name} wrote:",
-        &[("date", &m.datetime_full()), ("name", name)],
-    )
-}
-
 /// Reply-all: To = the original sender (or their Reply-To); Cc = every other
 /// recipient of the original, de-duplicated, without the sender and without
 /// any of `own`, the account's addresses (#448). An answer to a message the
 /// account sent goes to that message's recipients instead, as other mail
 /// programs do: answering yourself is never what Reply All means.
-pub(super) fn reply_all_prefill(m: &Message, own: &[String]) -> ComposePrefill {
-    let mut prefill = reply_prefill(m);
+pub(super) fn reply_all_prefill(m: &Message, own: &[String], header: &str) -> ComposePrefill {
+    let mut prefill = reply_prefill(m, header);
     let split = |list: &str| -> Vec<String> {
         list.split(',')
             .map(str::trim)
@@ -304,19 +292,17 @@ mod tests {
     use super::*;
     use crate::app::test_support::msg;
 
-    /// The attribution and the forward header carry the whole date, not
-    /// the list's label, which for today's mail is only a time (#528).
+    /// The forward header carries the whole date, not the list's label,
+    /// which for today's mail is only a time (#528).
     #[test]
-    fn reply_and_forward_name_the_full_date() {
+    fn a_forward_names_the_full_date() {
         let mut m = msg(1, 1, 10);
         m.date = "14:03".into();
         m.timestamp = 1_790_000_000;
         m.from_addr = "ada@example.com".into();
         m.subject = "Plans".into();
         let full = crate::datefmt::date_time(m.timestamp);
-        assert_eq!(attribution(&m), format!("On {full}, ada@example.com wrote:"));
         m.from_name = "Ada".into();
-        assert_eq!(attribution(&m), format!("On {full}, Ada wrote:"));
         assert_eq!(
             forward_header(&m),
             format!(
@@ -335,10 +321,10 @@ mod tests {
         m.reply_to = "editor@example.com".into();
         m.to = "me@example.com, other@example.com".into();
 
-        let r = reply_prefill(&m);
+        let r = reply_prefill(&m, "");
         assert_eq!(r.to, "editor@example.com");
 
-        let ra = reply_all_prefill(&m, &["me@example.com".to_string()]);
+        let ra = reply_all_prefill(&m, &["me@example.com".to_string()], "");
         assert_eq!(ra.to, "editor@example.com");
         assert_eq!(
             ra.cc, "other@example.com",
@@ -358,7 +344,7 @@ mod tests {
         m.from_addr = "ada@example.com".into();
         m.to = "Me <ME@example.com>, alias@example.org, bob@example.com".into();
         m.cc = "me+lists@example.com, carol@example.com, Bob <bob@example.com>".into();
-        let ra = reply_all_prefill(&m, &own);
+        let ra = reply_all_prefill(&m, &own, "");
         assert_eq!(ra.to, "ada@example.com");
         assert_eq!(ra.cc, "bob@example.com, carol@example.com");
     }
@@ -372,13 +358,13 @@ mod tests {
         m.from_addr = "me@example.com".into();
         m.to = "ada@example.com, me@example.com".into();
         m.cc = "bob@example.com".into();
-        let ra = reply_all_prefill(&m, &own);
+        let ra = reply_all_prefill(&m, &own, "");
         assert_eq!(ra.to, "ada@example.com");
         assert_eq!(ra.cc, "bob@example.com");
         // Sent only to Cc: the first of them takes To.
         m.to = String::new();
         m.cc = "bob@example.com, carol@example.com".into();
-        let ra = reply_all_prefill(&m, &own);
+        let ra = reply_all_prefill(&m, &own, "");
         assert_eq!(
             (ra.to.as_str(), ra.cc.as_str()),
             ("bob@example.com", "carol@example.com")
@@ -390,7 +376,7 @@ mod tests {
     fn reply_falls_back_to_the_sender() {
         let mut m = msg(1, 1, 10);
         m.from_addr = "ada@example.com".into();
-        assert_eq!(reply_prefill(&m).to, "ada@example.com");
+        assert_eq!(reply_prefill(&m, "").to, "ada@example.com");
     }
 
     #[test]
@@ -398,11 +384,11 @@ mod tests {
         let mut m = msg(1, 1, 10);
         m.subject = "Hi".into();
         m.body = crate::worker::extract_body(b"Content-Type: text/plain\r\n\r\nHello\r\n");
-        assert!(super::reply_prefill(&m).original_plain);
-        assert!(super::reply_all_prefill(&m, &["me@example.com".to_string()]).original_plain);
+        assert!(super::reply_prefill(&m, "").original_plain);
+        assert!(super::reply_all_prefill(&m, &["me@example.com".to_string()], "").original_plain);
         assert!(super::forward_prefill(&m).original_plain);
         m.body = "<html><body><p>Hello</p></body></html>".into();
-        assert!(!super::reply_prefill(&m).original_plain);
+        assert!(!super::reply_prefill(&m, "").original_plain);
         assert!(!super::forward_prefill(&m).original_plain);
     }
 

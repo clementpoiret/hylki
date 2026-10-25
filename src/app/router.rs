@@ -521,6 +521,7 @@ impl AppModel {
             | PrefOutput::SetReplyPosition(..)
             | PrefOutput::SetSignaturePosition(..)
             | PrefOutput::SetSignatureDashes(..)
+            | PrefOutput::SetReplyHeader(..)
             | PrefOutput::SetUndoSend(..)) => self.on_prefs_compose_pref(pref),
             // The rest of Preferences' outputs are mapped to their own
             // messages before they get here.

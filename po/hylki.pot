@@ -1007,9 +1007,6 @@ msgstr ""
 msgid "Message Source"
 msgstr ""
 
-msgid "On {date}, {name} wrote:"
-msgstr ""
-
 msgid "Forwarded message"
 msgstr ""
 
@@ -1440,6 +1437,9 @@ msgid "A new message with {n} file attached is open in Hylki."
 msgid_plural "A new message with {n} files attached is open in Hylki."
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "On {date} at {time}, {name} wrote:"
+msgstr ""
 
 msgid "GnuPG (gpg) is not installed, so this message cannot be read."
 msgstr ""
@@ -6574,6 +6574,18 @@ msgid "Undo Send"
 msgstr ""
 
 msgid "How long Undo is offered after sending."
+msgstr ""
+
+msgid "Reply Header"
+msgstr ""
+
+msgid "{name}, {address}, {date} and {time} are filled in from the original."
+msgstr ""
+
+msgid "Line above the quoted message"
+msgstr ""
+
+msgid "Restore Default"
 msgstr ""
 
 msgid "Spelling"

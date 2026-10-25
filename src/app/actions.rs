@@ -249,7 +249,7 @@ impl AppModel {
             RowAction::Reply => {
                 self.open_reply(
                     m.account_id,
-                    self.reply_context(&m, reply_prefill(&m)),
+                    self.reply_context(&m, reply_prefill(&m, &self.reply_header)),
                     (m.account_id, m.id),
                     &sender,
                 );
@@ -258,7 +258,7 @@ impl AppModel {
                 let own = self.own_identities(m.account_id);
                 self.open_reply(
                     m.account_id,
-                    self.reply_context(&m, reply_all_prefill(&m, &own)),
+                    self.reply_context(&m, reply_all_prefill(&m, &own, &self.reply_header)),
                     (m.account_id, m.id),
                     &sender,
                 );
@@ -325,7 +325,7 @@ impl AppModel {
                 let m = self.with_cached_body(m);
                 self.open_compose(
                     m.account_id,
-                    self.reply_context(&m, reply_prefill(&m)),
+                    self.reply_context(&m, reply_prefill(&m, &self.reply_header)),
                     &sender,
                 );
             }
@@ -335,7 +335,7 @@ impl AppModel {
                 let own = self.own_identities(m.account_id);
                 self.open_compose(
                     m.account_id,
-                    self.reply_context(&m, reply_all_prefill(&m, &own)),
+                    self.reply_context(&m, reply_all_prefill(&m, &own, &self.reply_header)),
                     &sender,
                 );
             }

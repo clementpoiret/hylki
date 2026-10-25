@@ -312,6 +312,11 @@ pub(crate) struct PrivacyFile {
     /// Off by default, as in most mail programs today.
     #[serde(default)]
     pub(crate) signature_dashes: bool,
+    /// The line above the quote in a reply, with `{name}`, `{address}`,
+    /// `{date}` and `{time}` filled in (#528). Empty for the default, in the
+    /// app's language.
+    #[serde(default)]
+    pub(crate) reply_header: String,
     /// Undo Send (#434): seconds a sent message waits, with Undo on offer,
     /// before it is handed to the server. 0 sends at once.
     #[serde(default = "default_undo_send_secs")]
@@ -693,6 +698,7 @@ impl Default for PrivacyFile {
             reply_position: ReplyPosition::default(),
             signature_position: SignaturePosition::default(),
             signature_dashes: false,
+            reply_header: String::new(),
             undo_send_secs: default_undo_send_secs(),
             spellcheck: true,
             spellcheck_langs: String::new(),

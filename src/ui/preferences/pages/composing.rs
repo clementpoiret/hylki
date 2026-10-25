@@ -24,6 +24,7 @@ pub(in crate::ui::preferences) struct ComposingPage {
     pub(in crate::ui::preferences) signature_position_row: adw::ComboRow,
     pub(in crate::ui::preferences) signature_dashes_row: adw::SwitchRow,
     pub(in crate::ui::preferences) undo_send_row: adw::ComboRow,
+    pub(in crate::ui::preferences) reply_header_row: adw::EntryRow,
     pub(in crate::ui::preferences) spelling_group: adw::PreferencesGroup,
     pub(in crate::ui::preferences) spellcheck_row: adw::SwitchRow,
     pub(in crate::ui::preferences) spell_lang_row: adw::ExpanderRow,
@@ -162,6 +163,25 @@ impl ComposingPage {
                     },
                 },
 
+                add = &adw::PreferencesGroup {
+                    set_title: &i18n("Reply Header"),
+                    set_description: Some(&i18n("{name}, {address}, {date} and {time} are filled in from the original.")),
+
+                    // Saved on Apply; the text is set and wired in build
+                    // below, beside the button that restores the default.
+                    #[name = "reply_header_row"]
+                    adw::EntryRow {
+                        set_title: &i18n("Line above the quoted message"),
+                        set_show_apply_button: true,
+                        add_suffix: reply_header_reset = &gtk::Button {
+                            set_icon_name: "edit-undo-symbolic",
+                            set_valign: gtk::Align::Center,
+                            set_tooltip_text: Some(i18n("Restore Default").as_str()),
+                            add_css_class: "flat",
+                        },
+                    },
+                },
+
                 #[name = "spelling_group"]
                 add = &adw::PreferencesGroup {
                     set_title: &i18n("Spelling"),
@@ -198,6 +218,7 @@ impl ComposingPage {
                 },
             }
         }
+        wire_reply_header(&reply_header_row, &reply_header_reset, sender);
         Self {
             page,
             compose_inline_row,
@@ -214,10 +235,40 @@ impl ComposingPage {
             signature_position_row,
             signature_dashes_row,
             undo_send_row,
+            reply_header_row,
             spelling_group,
             spellcheck_row,
             spell_lang_row,
             spell_words_row,
         }
+    }
+}
+
+/// The reply header row saves what Apply confirms, and its button goes back
+/// to the default, shown only while the text is something else.
+fn wire_reply_header(row: &adw::EntryRow, reset: &gtk::Button, sender: &ViewSender) {
+    use crate::mail::attribution::{default_template, stored_template};
+    {
+        let reset = reset.clone();
+        row.connect_changed(move |row| {
+            reset.set_visible(!stored_template(&row.text()).is_empty());
+        });
+    }
+    {
+        let sender = sender.clone();
+        row.connect_apply(move |row| {
+            let stored = stored_template(&row.text());
+            if stored.is_empty() {
+                row.set_text(&default_template());
+            }
+            let _ = sender.output(PrefOutput::SetReplyHeader(stored));
+        });
+    }
+    {
+        let (row, sender) = (row.clone(), sender.clone());
+        reset.connect_clicked(move |_| {
+            row.set_text(&default_template());
+            let _ = sender.output(PrefOutput::SetReplyHeader(String::new()));
+        });
     }
 }

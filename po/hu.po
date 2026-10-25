@@ -1132,9 +1132,6 @@ msgstr "(nincs tárgy)"
 msgid "Message Source"
 msgstr "Üzenetforrás"
 
-msgid "On {date}, {name} wrote:"
-msgstr ""
-
 #, fuzzy
 msgid "Forwarded message"
 msgstr "Üzenet továbbítása"
@@ -1618,6 +1615,10 @@ msgid "A new message with {n} file attached is open in Hylki."
 msgid_plural "A new message with {n} files attached is open in Hylki."
 msgstr[0] "{n} csatolt fájlt tartalmazó új üzenet megnyitva a Hylkiben."
 msgstr[1] "{n} csatolt fájlt tartalmazó új üzenet megnyitva a Hylkiben."
+
+#, fuzzy
+msgid "On {date} at {time}, {name} wrote:"
+msgstr "{date} {time} órakor"
 
 msgid "GnuPG (gpg) is not installed, so this message cannot be read."
 msgstr "A GnuPG (gpg) nincs telepítve, ezért ez az üzenet nem olvasható."
@@ -7367,6 +7368,21 @@ msgstr "Visszavonás"
 
 msgid "How long Undo is offered after sending."
 msgstr ""
+
+#, fuzzy
+msgid "Reply Header"
+msgstr "Válaszcím"
+
+msgid "{name}, {address}, {date} and {time} are filled in from the original."
+msgstr ""
+
+#, fuzzy
+msgid "Line above the quoted message"
+msgstr "Az idézett üzenet felett"
+
+#, fuzzy
+msgid "Restore Default"
+msgstr "Alapértelmezett beállítások visszaállítása"
 
 msgid "Spelling"
 msgstr "Helyesírás"

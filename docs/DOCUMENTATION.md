@@ -929,6 +929,16 @@ answers. **Settings → Composing → Reply and forward in the main window**,
 switched off, opens them in a window of their own instead, as **Compose in
 the main window** does for a new message.
 
+A reply opens with a line above the quoted message, "On Oct 25, 2026 at
+14:03, Ada wrote:" in the app's language. **Settings → Composing → Reply
+Header** changes it: `{name}`, `{address}`, `{date}` and `{time}` are
+filled in from the original, so `{name} <{address}> wrote on {date}:` gives
+"Ada <ada@example.org> wrote on Oct 25, 2026:". The date and time follow
+**Date format** and **Clock** in **Settings → Date and Time**. The button at
+the end of the row restores the default, which follows the language of the
+app. A forward opens with the original's From, Date and Subject, in the
+app's language too.
+
 The quoted message keeps its layout: its colors, fonts, tables and the
 pictures it carries inside itself look as they do in the reader, and go to
 the recipient that way. Pictures on the sender's server show only when the

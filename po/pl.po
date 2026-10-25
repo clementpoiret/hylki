@@ -1149,9 +1149,6 @@ msgstr "(bez tematu)"
 msgid "Message Source"
 msgstr "Źródło wiadomości"
 
-msgid "On {date}, {name} wrote:"
-msgstr ""
-
 #, fuzzy
 msgid "Forwarded message"
 msgstr "Przekaż dalej tę wiadomość"
@@ -1651,6 +1648,10 @@ msgid_plural "A new message with {n} files attached is open in Hylki."
 msgstr[0] "W aplikacji Hylki otwarto nową wiadomość z {n} załączonym plikiem."
 msgstr[1] "W aplikacji Hylki otwarto nową wiadomość z {n} załączonymi plikami."
 msgstr[2] "W aplikacji Hylki otwarto nową wiadomość z {n} załączonymi plikami."
+
+#, fuzzy
+msgid "On {date} at {time}, {name} wrote:"
+msgstr "{date} o {time}"
 
 msgid "GnuPG (gpg) is not installed, so this message cannot be read."
 msgstr ""
@@ -7428,6 +7429,21 @@ msgstr "Cofnij"
 
 msgid "How long Undo is offered after sending."
 msgstr ""
+
+#, fuzzy
+msgid "Reply Header"
+msgstr "Odpowiedź do"
+
+msgid "{name}, {address}, {date} and {time} are filled in from the original."
+msgstr ""
+
+#, fuzzy
+msgid "Line above the quoted message"
+msgstr "Nad cytowaną wiadomością"
+
+#, fuzzy
+msgid "Restore Default"
+msgstr "Przywróć domyślne"
 
 msgid "Spelling"
 msgstr "Pisownia"

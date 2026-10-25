@@ -370,6 +370,12 @@ impl Preferences {
             .composing
             .signature_dashes_row
             .set_active(init.signature_dashes);
+        let header = if init.reply_header.is_empty() {
+            crate::mail::attribution::default_template()
+        } else {
+            init.reply_header.clone()
+        };
+        widgets.composing.reply_header_row.set_text(&header);
         let undo_labels: Vec<String> = crate::config::UNDO_SEND_CHOICES
             .iter()
             .map(|&secs| match secs {

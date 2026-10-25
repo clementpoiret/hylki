@@ -741,6 +741,8 @@ pub(crate) struct AppModel {
     pub(super) signature_position: config::SignaturePosition,
     /// A `-- ` line goes above the signature in new messages.
     pub(super) signature_dashes: bool,
+    /// The line above a reply's quote, "" for the default (#528).
+    pub(super) reply_header: String,
     /// Undo Send delay in seconds, 0 for off (#434).
     pub(super) undo_send_secs: u32,
     pub(super) spellcheck: bool,
