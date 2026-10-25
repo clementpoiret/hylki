@@ -21,6 +21,13 @@
   number key beside each of the first nine tags. Single-key shortcuts are
   on for a new install; an existing one keeps its setting.
 
+- **Fixed: the menu of an address in the reader was always English** (#529,
+  reported by samuel-edlmeier). New Message, Copy Address and Add to
+  Contacts are in the translations. A right-click on an address while the
+  message menu was open showed the message menu again, and a right-click on
+  the ground around the cards opened a message menu; the first now opens the
+  address menu and the second opens none.
+
 - **Fixed: the line above a quoted reply was always English** (#528,
   reported by samuel-edlmeier). "On …, … wrote:" and the forwarded message
   header (From, Date, Subject) were not in the translations, and are now.
