@@ -1149,6 +1149,24 @@ msgstr "(bez tematu)"
 msgid "Message Source"
 msgstr "Źródło wiadomości"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Przekaż dalej tę wiadomość"
+
+msgid "From: {from}"
+msgstr "Od: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "wygasa {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Zaakceptowane: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Nie udało się wyeksportować danych: {e}"
 
@@ -1807,9 +1825,6 @@ msgstr "Podpisane przez: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Sprawdzone przez: {who}"
-
-msgid "From: {from}"
-msgstr "Od: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "Odpowiedzi trafiałyby na adres {reply}, a nie {from}"

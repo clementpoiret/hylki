@@ -1007,6 +1007,21 @@ msgstr ""
 msgid "Message Source"
 msgstr ""
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+msgid "Forwarded message"
+msgstr ""
+
+msgid "From: {from}"
+msgstr ""
+
+msgid "Date: {date}"
+msgstr ""
+
+msgid "Subject: {subject}"
+msgstr ""
+
 msgid "Export failed: {e}"
 msgstr ""
 
@@ -1578,9 +1593,6 @@ msgid "Signed by: {d}"
 msgstr ""
 
 msgid "Checked by: {who}"
-msgstr ""
-
-msgid "From: {from}"
 msgstr ""
 
 msgid "Replies would go to {reply}, not {from}"

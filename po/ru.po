@@ -1147,6 +1147,24 @@ msgstr "(без темы)"
 msgid "Message Source"
 msgstr "Исходный текст сообщения"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Переслать это сообщение"
+
+msgid "From: {from}"
+msgstr "От: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "срок действия истекает {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Принято: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Ошибка экспорта: {e}"
 
@@ -1794,9 +1812,6 @@ msgstr "Подписано: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Проверено: {who}"
-
-msgid "From: {from}"
-msgstr "От: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "Ответы будут отправлены на {reply}, а не на {from}"

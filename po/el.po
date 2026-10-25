@@ -1075,6 +1075,24 @@ msgstr "(χωρίς θέμα)"
 msgid "Message Source"
 msgstr "Πηγαίος κώδικας μηνύματος"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Προώθηση αυτού του μηνύματος"
+
+msgid "From: {from}"
+msgstr "Από: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "λήγει στις {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Αποδεκτή: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Η εξαγωγή απέτυχε: {e}"
 
@@ -1714,9 +1732,6 @@ msgstr "Υπογράφηκε από: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Ελέγχθηκε από: {who}"
-
-msgid "From: {from}"
-msgstr "Από: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "Οι απαντήσεις θα πήγαιναν στη διεύθυνση {reply}, όχι στη {from}"

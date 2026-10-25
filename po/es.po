@@ -1068,6 +1068,24 @@ msgstr "(sin asunto)"
 msgid "Message Source"
 msgstr "Código fuente del mensaje"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Reenviar este mensaje"
+
+msgid "From: {from}"
+msgstr "De: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "caduca el {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Aceptada: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Error al exportar: {e}"
 
@@ -1705,9 +1723,6 @@ msgstr "Firmado por: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Comprobado por: {who}"
-
-msgid "From: {from}"
-msgstr "De: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "Las respuestas irían a {reply}, no a {from}"

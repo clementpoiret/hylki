@@ -1,6 +1,7 @@
 //! What a composer opens with when it answers, forwards or resumes a message:
 //! recipients, subject, threading headers and the quoted original.
 
+use crate::i18n::{i18n, i18n_f};
 use crate::models::Message;
 use crate::ui::compose::ComposePrefill;
 
@@ -17,7 +18,7 @@ pub(super) fn reply_subject(subject: &str) -> String {
 
 pub(super) fn reply_prefill(m: &Message) -> ComposePrefill {
     let subject = reply_subject(&m.subject);
-    let attribution = format!("On {}, {} wrote:", m.date, m.from_name);
+    let attribution = attribution(m);
     ComposePrefill {
         // A Reply-To header is the sender saying "answer me here instead" —
         // a mailing list, a no-reply address with a monitored counterpart. It
@@ -44,6 +45,21 @@ pub(super) fn reply_prefill(m: &Message) -> ComposePrefill {
         references: thread_chain(m),
         ..Default::default()
     }
+}
+
+/// The line above a reply's quote, in the app's language (#528), with the
+/// full date: the list's label says "14:03" for mail from today, which
+/// tells the reader of the reply nothing a day later.
+fn attribution(m: &Message) -> String {
+    let name = if m.from_name.trim().is_empty() {
+        &m.from_addr
+    } else {
+        &m.from_name
+    };
+    i18n_f(
+        "On {date}, {name} wrote:",
+        &[("date", &m.datetime_full()), ("name", name)],
+    )
 }
 
 /// Reply-all: To = the original sender (or their Reply-To); Cc = every other
@@ -158,12 +174,27 @@ pub(super) fn forward_subject(subject: &str) -> String {
     }
 }
 
+/// The header a forward quotes the original under, in the app's language
+/// (#528). The dashes stay outside the translation: the composer's scripts
+/// find the header by them.
+pub(super) fn forward_header(m: &Message) -> String {
+    let from = if m.from_name.trim().is_empty() {
+        m.from_addr.clone()
+    } else {
+        format!("{} <{}>", m.from_name, m.from_addr)
+    };
+    [
+        format!("---------- {} ----------", i18n("Forwarded message")),
+        i18n_f("From: {from}", &[("from", &from)]),
+        i18n_f("Date: {date}", &[("date", &m.datetime_full())]),
+        i18n_f("Subject: {subject}", &[("subject", &m.subject)]),
+    ]
+    .join("\n")
+}
+
 pub(super) fn forward_prefill(m: &Message) -> ComposePrefill {
     let subject = forward_subject(&m.subject);
-    let header = format!(
-        "---------- Forwarded message ----------\nFrom: {} <{}>\nDate: {}\nSubject: {}",
-        m.from_name, m.from_addr, m.date, m.subject
-    );
+    let header = forward_header(m);
     // Forward the body with its formatting, sanitized (issue #52), so a
     // forwarded invoice still looks like the invoice.
     let body_html = quoted_original(&header, &m.body);
@@ -272,6 +303,28 @@ pub(super) fn stage_attachments(
 mod tests {
     use super::*;
     use crate::app::test_support::msg;
+
+    /// The attribution and the forward header carry the whole date, not
+    /// the list's label, which for today's mail is only a time (#528).
+    #[test]
+    fn reply_and_forward_name_the_full_date() {
+        let mut m = msg(1, 1, 10);
+        m.date = "14:03".into();
+        m.timestamp = 1_790_000_000;
+        m.from_addr = "ada@example.com".into();
+        m.subject = "Plans".into();
+        let full = crate::datefmt::date_time(m.timestamp);
+        assert_eq!(attribution(&m), format!("On {full}, ada@example.com wrote:"));
+        m.from_name = "Ada".into();
+        assert_eq!(attribution(&m), format!("On {full}, Ada wrote:"));
+        assert_eq!(
+            forward_header(&m),
+            format!(
+                "---------- Forwarded message ----------\nFrom: Ada <ada@example.com>\n\
+                 Date: {full}\nSubject: Plans"
+            )
+        );
+    }
 
     /// A sender's Reply-To wins over their From address, and Reply All must
     /// not smuggle the sender back in through Cc.

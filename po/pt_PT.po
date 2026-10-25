@@ -1072,6 +1072,24 @@ msgstr "(sem assunto)"
 msgid "Message Source"
 msgstr "Código fonte da mensagem"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Reencaminhar esta mensagem"
+
+msgid "From: {from}"
+msgstr "De: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "expira em {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Aceite: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Falha ao exportar: {e}"
 
@@ -1706,9 +1724,6 @@ msgstr "Assinada por: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Verificada por: {who}"
-
-msgid "From: {from}"
-msgstr "De: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "As respostas seriam enviadas para {reply}, não para {from}"

@@ -1132,6 +1132,24 @@ msgstr "(nincs tárgy)"
 msgid "Message Source"
 msgstr "Üzenetforrás"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Üzenet továbbítása"
+
+msgid "From: {from}"
+msgstr "Feladó: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "lejár: {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Elfogadva: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Az exportálás sikertelen: {e}"
 
@@ -1775,9 +1793,6 @@ msgstr "Aláírta: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Ellenőrizte: {who}"
-
-msgid "From: {from}"
-msgstr "Feladó: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "A válaszok ide mennének: {reply}, nem ide: {from}"

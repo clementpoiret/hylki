@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Fixed: the line above a quoted reply was always English** (#528,
+  reported by samuel-edlmeier). "On …, … wrote:" and the forwarded message
+  header (From, Date, Subject) were not in the translations, and are now.
+  Both give the full date and time of the original; a reply to mail from
+  the same day said only the time. The signature still goes above the quote
+  in a Markdown reply or forward whatever the language.
+
 - **Fixed: a narrow reader pushed the window buttons off the window.** With
   minimize, maximize and close all shown, the reader's left group of
   buttons, the ⋯ menu and the window buttons were wider than the narrowest

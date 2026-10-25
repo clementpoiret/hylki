@@ -1060,6 +1060,24 @@ msgstr "(sense assumpte)"
 msgid "Message Source"
 msgstr "Codi font del missatge"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Reenvia aquest missatge"
+
+msgid "From: {from}"
+msgstr "De: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "caduca el {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Acceptat: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "L'exportació ha fallat: {e}"
 
@@ -1689,9 +1707,6 @@ msgstr "Signat per: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Comprovat per: {who}"
-
-msgid "From: {from}"
-msgstr "De: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "Les respostes anirien a {reply}, no a {from}"

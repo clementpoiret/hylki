@@ -1100,6 +1100,24 @@ msgstr "(nessun oggetto)"
 msgid "Message Source"
 msgstr "Sorgente del messaggio"
 
+msgid "On {date}, {name} wrote:"
+msgstr ""
+
+#, fuzzy
+msgid "Forwarded message"
+msgstr "Inoltra questo messaggio"
+
+msgid "From: {from}"
+msgstr "Da: {from}"
+
+#, fuzzy
+msgid "Date: {date}"
+msgstr "scade il {date}"
+
+#, fuzzy
+msgid "Subject: {subject}"
+msgstr "Accettato: {subject}"
+
 msgid "Export failed: {e}"
 msgstr "Esportazione non riuscita: {e}"
 
@@ -1738,9 +1756,6 @@ msgstr "Firmato da: {d}"
 
 msgid "Checked by: {who}"
 msgstr "Verificato da: {who}"
-
-msgid "From: {from}"
-msgstr "Da: {from}"
 
 msgid "Replies would go to {reply}, not {from}"
 msgstr "Le risposte andrebbero a {reply}, non a {from}"
