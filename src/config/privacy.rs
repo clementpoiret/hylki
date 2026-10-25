@@ -422,8 +422,9 @@ pub(crate) struct PrivacyFile {
     /// The widths columns were dragged to, in pixels, by column name.
     #[serde(default)]
     pub(crate) list_column_widths: std::collections::BTreeMap<String, i32>,
-    /// Single-key shortcuts (j/k, r, a, d…) without a modifier. Off by default:
-    /// a stray keystroke shouldn't archive mail for someone who never asked.
+    /// Single-key shortcuts (j/k, r, a, d…) without a modifier. On for a new
+    /// install, so the menus' key hints name keys that work; a file from
+    /// before the default changed keeps its own choice.
     #[serde(default)]
     pub(crate) single_key_shortcuts: bool,
     /// Gmail's keys in place of Hylki's own for the single-key shortcuts
@@ -730,7 +731,7 @@ impl Default for PrivacyFile {
             list_bulk_bar_bottom: false,
             toolbar_fold_right: true,
             list_column_widths: Default::default(),
-            single_key_shortcuts: false,
+            single_key_shortcuts: true,
             gmail_keys: false,
             keep_downloads_days: 0,
             run_in_background: false,

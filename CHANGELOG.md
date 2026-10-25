@@ -8,7 +8,8 @@
   entry: the single key while single-key shortcuts are on, Gmail's with
   Gmail keys, and otherwise Ctrl+R, Ctrl+Shift+R, Ctrl+U, Ctrl+F,
   Ctrl+Shift+P and Delete. With single keys on, every Tags menu shows the
-  number key beside each of the first nine tags.
+  number key beside each of the first nine tags. Single-key shortcuts are
+  on for a new install; an existing one keeps its setting.
 
 - **Fixed: the line above a quoted reply was always English** (#528,
   reported by samuel-edlmeier). "On …, … wrote:" and the forwarded message

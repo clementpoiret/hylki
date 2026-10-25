@@ -147,8 +147,8 @@ fn privacy_toml() {
 /// upgrade from before every key) differ: the flags that record a default
 /// already applied, the section placements that `LegacySwitches` decides
 /// for an old file, and what is on for a new install only (the toolbar's
-/// folded right group). The two default sets must keep exactly this
-/// difference.
+/// folded right group, single-key shortcuts). The two default sets must
+/// keep exactly this difference.
 #[test]
 fn privacy_defaults_differ_only_in_the_applied_flags() {
     let fresh = toml::Table::try_from(PrivacyFile::default()).unwrap();
