@@ -4861,6 +4861,47 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Barra di stato ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Tutti i tipi"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Non ancora attendibile"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Firmato, chiave revocata"
+
+msgid "expires {date}"
+msgstr "scade il {date}"
+
+msgid "expired {date}"
+msgstr "scaduta il {date}"
+
+msgid "signs and encrypts"
+msgstr "firma e crittografa"
+
+msgid "signs only: no encryption subkey"
+msgstr "solo firma: nessuna sottochiave di crittografia"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "{n} altro indirizzo"
+msgstr[1] "{n} altri indirizzi"
+
+msgid "Export public key…"
+msgstr "Esporta chiave pubblica…"
+
+msgid "Delete this key"
+msgstr "Elimina questa chiave"
+
+msgid "Trust…"
+msgstr "Rendi attendibile…"
+
+msgid "Remove this key"
+msgstr "Rimuovi questa chiave"
+
 msgid "2 years"
 msgstr "2 anni"
 
@@ -4912,6 +4953,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Recupera per indirizzo…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Nessuna chiave da altre persone ancora."
+
 msgid "GnuPG {version} found."
 msgstr ""
 
@@ -4925,9 +4972,6 @@ msgstr ""
 
 msgid "No key of your own yet. Generate one for your address."
 msgstr "Nessuna tua chiave ancora. Generane una per il tuo indirizzo."
-
-msgid "No keys from other people yet."
-msgstr "Nessuna chiave da altre persone ancora."
 
 msgid "Your key is ready."
 msgstr "La tua chiave è pronta."
@@ -5041,35 +5085,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "Impossibile firmare la chiave: {e}"
-
-msgid "expires {date}"
-msgstr "scade il {date}"
-
-msgid "expired {date}"
-msgstr "scaduta il {date}"
-
-msgid "signs and encrypts"
-msgstr "firma e crittografa"
-
-msgid "signs only: no encryption subkey"
-msgstr "solo firma: nessuna sottochiave di crittografia"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "{n} altro indirizzo"
-msgstr[1] "{n} altri indirizzi"
-
-msgid "Export public key…"
-msgstr "Esporta chiave pubblica…"
-
-msgid "Delete this key"
-msgstr "Elimina questa chiave"
-
-msgid "Trust…"
-msgstr "Rendi attendibile…"
-
-msgid "Remove this key"
-msgstr "Rimuovi questa chiave"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."

@@ -4909,6 +4909,47 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Állapotsáv ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Minden típus"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Fordította"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Aláírva, visszavont kulcs"
+
+msgid "expires {date}"
+msgstr "lejár: {date}"
+
+msgid "expired {date}"
+msgstr "lejárt: {date}"
+
+msgid "signs and encrypts"
+msgstr "aláír és titkosít"
+
+msgid "signs only: no encryption subkey"
+msgstr "csak aláír: nincs titkosítási alkulcs"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "még {n} cím"
+msgstr[1] "még {n} cím"
+
+msgid "Export public key…"
+msgstr "Nyilvános kulcs exportálása…"
+
+msgid "Delete this key"
+msgstr "Kulcs törlése"
+
+msgid "Trust…"
+msgstr "Megbízhatóvá tétel…"
+
+msgid "Remove this key"
+msgstr "Kulcs eltávolítása"
+
 msgid "2 years"
 msgstr "2 év"
 
@@ -4960,6 +5001,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Lekérés cím alapján…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Még nincsenek másoktól származó kulcsok."
+
 msgid "GnuPG {version} found."
 msgstr ""
 
@@ -4973,9 +5020,6 @@ msgstr ""
 
 msgid "No key of your own yet. Generate one for your address."
 msgstr "Még nincs saját kulcsa. Hozzon létre egyet a címéhez."
-
-msgid "No keys from other people yet."
-msgstr "Még nincsenek másoktól származó kulcsok."
 
 msgid "Your key is ready."
 msgstr "A kulcsa elkészült."
@@ -5088,35 +5132,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "A kulcs nem írható alá: {e}"
-
-msgid "expires {date}"
-msgstr "lejár: {date}"
-
-msgid "expired {date}"
-msgstr "lejárt: {date}"
-
-msgid "signs and encrypts"
-msgstr "aláír és titkosít"
-
-msgid "signs only: no encryption subkey"
-msgstr "csak aláír: nincs titkosítási alkulcs"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "még {n} cím"
-msgstr[1] "még {n} cím"
-
-msgid "Export public key…"
-msgstr "Nyilvános kulcs exportálása…"
-
-msgid "Delete this key"
-msgstr "Kulcs törlése"
-
-msgid "Trust…"
-msgstr "Megbízhatóvá tétel…"
-
-msgid "Remove this key"
-msgstr "Kulcs eltávolítása"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."

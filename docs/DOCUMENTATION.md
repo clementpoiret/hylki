@@ -1269,6 +1269,10 @@ signature. There are four ways to get one, none of which need a terminal:
   looks a key up by email address, and **Import…** reads a key file.
 - A key someone sends you by any other route can be imported the same way.
 
+Other people's keys are listed by name. The search field above the list finds
+a key by name, address, key ID or fingerprint, and the menu beside it shows only the trusted keys, the ones not trusted yet, or
+the expired and revoked ones. These keys are left out of the Settings search.
+
 **4. Trust a key**
 
 An imported key checks signatures, but until you have vouched for it the

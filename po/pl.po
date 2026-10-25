@@ -4972,6 +4972,48 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Pasek stanu ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Wszystkie typy"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Tłumacze"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Podpisane przez: {d}"
+
+msgid "expires {date}"
+msgstr "wygasa {date}"
+
+msgid "expired {date}"
+msgstr "wygasł {date}"
+
+msgid "signs and encrypts"
+msgstr "podpisuje i szyfruje"
+
+msgid "signs only: no encryption subkey"
+msgstr "tylko podpisuje: brak podklucza do szyfrowania"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "jeszcze {n} adres"
+msgstr[1] "jeszcze {n} adresy"
+msgstr[2] "jeszcze {n} adresów"
+
+msgid "Export public key…"
+msgstr "Eksportuj klucz publiczny…"
+
+msgid "Delete this key"
+msgstr "Usuń ten klucz"
+
+msgid "Trust…"
+msgstr "Zaufaj…"
+
+msgid "Remove this key"
+msgstr "Usuń ten klucz"
+
 msgid "2 years"
 msgstr "2 lata"
 
@@ -5024,6 +5066,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Pobierz według adresu…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Brak kluczy innych osób."
+
 msgid "GnuPG {version} found."
 msgstr ""
 
@@ -5037,9 +5085,6 @@ msgstr ""
 
 msgid "No key of your own yet. Generate one for your address."
 msgstr "Brak własnego klucza. Wygeneruj klucz dla własnego adresu."
-
-msgid "No keys from other people yet."
-msgstr "Brak kluczy innych osób."
 
 msgid "Your key is ready."
 msgstr "Klucz jest gotowy."
@@ -5152,36 +5197,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "Nie udało się podpisać klucza: {e}"
-
-msgid "expires {date}"
-msgstr "wygasa {date}"
-
-msgid "expired {date}"
-msgstr "wygasł {date}"
-
-msgid "signs and encrypts"
-msgstr "podpisuje i szyfruje"
-
-msgid "signs only: no encryption subkey"
-msgstr "tylko podpisuje: brak podklucza do szyfrowania"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "jeszcze {n} adres"
-msgstr[1] "jeszcze {n} adresy"
-msgstr[2] "jeszcze {n} adresów"
-
-msgid "Export public key…"
-msgstr "Eksportuj klucz publiczny…"
-
-msgid "Delete this key"
-msgstr "Usuń ten klucz"
-
-msgid "Trust…"
-msgstr "Zaufaj…"
-
-msgid "Remove this key"
-msgstr "Usuń ten klucz"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."

@@ -4745,6 +4745,47 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Barre d’état ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Tous les types"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Confiance non établie"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Signé, clé révoquée"
+
+msgid "expires {date}"
+msgstr "expire le {date}"
+
+msgid "expired {date}"
+msgstr "expiré le {date}"
+
+msgid "signs and encrypts"
+msgstr "signe et chiffre"
+
+msgid "signs only: no encryption subkey"
+msgstr "signatures uniquement : pas de sous-clé de chiffrement"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "{n} autre adresse"
+msgstr[1] "{n} autres adresses"
+
+msgid "Export public key…"
+msgstr "Exporter la clé publique…"
+
+msgid "Delete this key"
+msgstr "Supprimer cette clé"
+
+msgid "Trust…"
+msgstr "Faire confiance…"
+
+msgid "Remove this key"
+msgstr "Supprimer cette clé"
+
 msgid "2 years"
 msgstr "2 ans"
 
@@ -4791,6 +4832,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Récupérer par adresse…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Aucune clé provenant d’autres personnes pour le moment."
+
 msgid "GnuPG {version} found."
 msgstr "GnuPG {version} détecté."
 
@@ -4803,9 +4850,6 @@ msgstr ""
 
 msgid "No key of your own yet. Generate one for your address."
 msgstr "Vous n’avez pas encore de clé. Générez-en une pour votre adresse."
-
-msgid "No keys from other people yet."
-msgstr "Aucune clé provenant d’autres personnes pour le moment."
 
 msgid "Your key is ready."
 msgstr "Votre clé est prête."
@@ -4915,35 +4959,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "Impossible de signer la clé : {e}"
-
-msgid "expires {date}"
-msgstr "expire le {date}"
-
-msgid "expired {date}"
-msgstr "expiré le {date}"
-
-msgid "signs and encrypts"
-msgstr "signe et chiffre"
-
-msgid "signs only: no encryption subkey"
-msgstr "signatures uniquement : pas de sous-clé de chiffrement"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "{n} autre adresse"
-msgstr[1] "{n} autres adresses"
-
-msgid "Export public key…"
-msgstr "Exporter la clé publique…"
-
-msgid "Delete this key"
-msgstr "Supprimer cette clé"
-
-msgid "Trust…"
-msgstr "Faire confiance…"
-
-msgid "Remove this key"
-msgstr "Supprimer cette clé"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."

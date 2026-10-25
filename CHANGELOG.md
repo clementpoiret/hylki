@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Added: a search for other people's OpenPGP keys** (#432, suggested by
+  3v1n0). A keyring of a hundred keys or more was one long list in
+  Settings → OpenPGP. Other people's keys are now sorted by name, and a
+  search field above them finds one by name, address, key ID or
+  fingerprint, with a menu beside it that shows only the trusted keys, the
+  ones not trusted yet, or the expired and revoked ones.
+
 - **Fixed: right-to-left mail arrived left to right** (#524, reported by
   bjesus). The composer lays out each line in the direction of its own
   text, but sent nothing that said so, and most mail clients showed Hebrew,

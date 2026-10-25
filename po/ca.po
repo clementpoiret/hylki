@@ -4695,6 +4695,47 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Barra d'estat ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Tots els tipus"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Encara no és de confiança"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Signat, clau revocada"
+
+msgid "expires {date}"
+msgstr "caduca el {date}"
+
+msgid "expired {date}"
+msgstr "ha caducat el {date}"
+
+msgid "signs and encrypts"
+msgstr "signa i xifra"
+
+msgid "signs only: no encryption subkey"
+msgstr "només signa: sense subclau de xifratge"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "{n} adreça més"
+msgstr[1] "{n} adreces més"
+
+msgid "Export public key…"
+msgstr "Exporta la clau pública…"
+
+msgid "Delete this key"
+msgstr "Suprimeix aquesta clau"
+
+msgid "Trust…"
+msgstr "Confia-hi…"
+
+msgid "Remove this key"
+msgstr "Elimina aquesta clau"
+
 msgid "2 years"
 msgstr "2 anys"
 
@@ -4741,6 +4782,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Obtén per adreça…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Encara no hi ha claus d'altres persones."
+
 msgid "GnuPG {version} found."
 msgstr "S'ha trobat el GnuPG {version}."
 
@@ -4753,9 +4800,6 @@ msgstr ""
 
 msgid "No key of your own yet. Generate one for your address."
 msgstr "Encara no tens cap clau pròpia. Genera'n una per a la teva adreça."
-
-msgid "No keys from other people yet."
-msgstr "Encara no hi ha claus d'altres persones."
 
 msgid "Your key is ready."
 msgstr "La teva clau està a punt."
@@ -4865,35 +4909,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "No s'ha pogut signar la clau: {e}"
-
-msgid "expires {date}"
-msgstr "caduca el {date}"
-
-msgid "expired {date}"
-msgstr "ha caducat el {date}"
-
-msgid "signs and encrypts"
-msgstr "signa i xifra"
-
-msgid "signs only: no encryption subkey"
-msgstr "només signa: sense subclau de xifratge"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "{n} adreça més"
-msgstr[1] "{n} adreces més"
-
-msgid "Export public key…"
-msgstr "Exporta la clau pública…"
-
-msgid "Delete this key"
-msgstr "Suprimeix aquesta clau"
-
-msgid "Trust…"
-msgstr "Confia-hi…"
-
-msgid "Remove this key"
-msgstr "Elimina aquesta clau"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."

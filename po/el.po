@@ -4769,6 +4769,47 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Γραμμή κατάστασης ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Όλοι οι τύποι"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Δεν είναι ακόμη αξιόπιστο"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Υπογεγραμμένο, το κλειδί έχει ανακληθεί"
+
+msgid "expires {date}"
+msgstr "λήγει στις {date}"
+
+msgid "expired {date}"
+msgstr "έληξε στις {date}"
+
+msgid "signs and encrypts"
+msgstr "υπογράφει και κρυπτογραφεί"
+
+msgid "signs only: no encryption subkey"
+msgstr "μόνο υπογραφή: χωρίς δευτερεύον κλειδί κρυπτογράφησης"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "{n} ακόμη διεύθυνση"
+msgstr[1] "{n} ακόμη διευθύνσεις"
+
+msgid "Export public key…"
+msgstr "Εξαγωγή δημόσιου κλειδιού…"
+
+msgid "Delete this key"
+msgstr "Διαγραφή αυτού του κλειδιού"
+
+msgid "Trust…"
+msgstr "Ορισμός ως έμπιστου…"
+
+msgid "Remove this key"
+msgstr "Αφαίρεση αυτού του κλειδιού"
+
 msgid "2 years"
 msgstr "2 έτη"
 
@@ -4815,6 +4856,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Ανάκτηση κατά διεύθυνση…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Δεν υπάρχουν ακόμη κλειδιά άλλων ατόμων."
+
 msgid "GnuPG {version} found."
 msgstr "Βρέθηκε το GnuPG {version}."
 
@@ -4828,9 +4875,6 @@ msgstr ""
 msgid "No key of your own yet. Generate one for your address."
 msgstr ""
 "Δεν έχετε ακόμη δικό σας κλειδί. Δημιουργήστε ένα για τη διεύθυνσή σας."
-
-msgid "No keys from other people yet."
-msgstr "Δεν υπάρχουν ακόμη κλειδιά άλλων ατόμων."
 
 msgid "Your key is ready."
 msgstr "Το κλειδί σας είναι έτοιμο."
@@ -4940,35 +4984,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "Δεν ήταν δυνατή η υπογραφή του κλειδιού: {e}"
-
-msgid "expires {date}"
-msgstr "λήγει στις {date}"
-
-msgid "expired {date}"
-msgstr "έληξε στις {date}"
-
-msgid "signs and encrypts"
-msgstr "υπογράφει και κρυπτογραφεί"
-
-msgid "signs only: no encryption subkey"
-msgstr "μόνο υπογραφή: χωρίς δευτερεύον κλειδί κρυπτογράφησης"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "{n} ακόμη διεύθυνση"
-msgstr[1] "{n} ακόμη διευθύνσεις"
-
-msgid "Export public key…"
-msgstr "Εξαγωγή δημόσιου κλειδιού…"
-
-msgid "Delete this key"
-msgstr "Διαγραφή αυτού του κλειδιού"
-
-msgid "Trust…"
-msgstr "Ορισμός ως έμπιστου…"
-
-msgid "Remove this key"
-msgstr "Αφαίρεση αυτού του κλειδιού"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."

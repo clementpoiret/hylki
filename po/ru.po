@@ -4919,6 +4919,48 @@ msgstr ""
 msgid "Status bar ({n})"
 msgstr "Строка состояния ({n})"
 
+#, fuzzy
+msgid "All keys"
+msgstr "Все типы"
+
+#, fuzzy
+msgid "Not trusted"
+msgstr "Не переведено"
+
+#, fuzzy
+msgid "Expired or revoked"
+msgstr "Подписано, ключ отозван"
+
+msgid "expires {date}"
+msgstr "срок действия истекает {date}"
+
+msgid "expired {date}"
+msgstr "срок действия истёк {date}"
+
+msgid "signs and encrypts"
+msgstr "подписывает и шифрует"
+
+msgid "signs only: no encryption subkey"
+msgstr "только подписывает: нет подключа шифрования"
+
+msgid "{n} more address"
+msgid_plural "{n} more addresses"
+msgstr[0] "ещё {n} адрес"
+msgstr[1] "ещё {n} адреса"
+msgstr[2] "ещё {n} адресов"
+
+msgid "Export public key…"
+msgstr "Экспортировать открытый ключ…"
+
+msgid "Delete this key"
+msgstr "Удалить этот ключ"
+
+msgid "Trust…"
+msgstr "Доверять…"
+
+msgid "Remove this key"
+msgstr "Удалить этот ключ"
+
 msgid "2 years"
 msgstr "2 года"
 
@@ -4970,6 +5012,12 @@ msgstr ""
 msgid "Fetch by address…"
 msgstr "Получить по адресу…"
 
+msgid "Search by name, address or key ID"
+msgstr ""
+
+msgid "No keys from other people yet."
+msgstr "Ключей других людей пока нет."
+
 msgid "GnuPG {version} found."
 msgstr ""
 
@@ -4983,9 +5031,6 @@ msgstr ""
 
 msgid "No key of your own yet. Generate one for your address."
 msgstr "У вас пока нет собственного ключа. Сгенерируйте его для вашего адреса."
-
-msgid "No keys from other people yet."
-msgstr "Ключей других людей пока нет."
 
 msgid "Your key is ready."
 msgstr "Ваш ключ готов."
@@ -5097,36 +5142,6 @@ msgstr ""
 
 msgid "Could not sign the key: {e}"
 msgstr "Не удалось подписать ключ: {e}"
-
-msgid "expires {date}"
-msgstr "срок действия истекает {date}"
-
-msgid "expired {date}"
-msgstr "срок действия истёк {date}"
-
-msgid "signs and encrypts"
-msgstr "подписывает и шифрует"
-
-msgid "signs only: no encryption subkey"
-msgstr "только подписывает: нет подключа шифрования"
-
-msgid "{n} more address"
-msgid_plural "{n} more addresses"
-msgstr[0] "ещё {n} адрес"
-msgstr[1] "ещё {n} адреса"
-msgstr[2] "ещё {n} адресов"
-
-msgid "Export public key…"
-msgstr "Экспортировать открытый ключ…"
-
-msgid "Delete this key"
-msgstr "Удалить этот ключ"
-
-msgid "Trust…"
-msgstr "Доверять…"
-
-msgid "Remove this key"
-msgstr "Удалить этот ключ"
 
 msgid "{n} key imported."
 msgid_plural "{n} keys imported."
