@@ -31,13 +31,14 @@ pub(super) struct ReaderToolbarWidgets {
     spinner: gtk::Widget,
     bin: adw::BreakpointBin,
     breakpoint: adw::Breakpoint,
-    /// The second fold: below this the left group goes into the ⋯ menu as
-    /// well, or the window controls would be pushed off the pane.
-    left_breakpoint: adw::Breakpoint,
-    /// What the folded row (left group, ⋯, window controls) needs, and
-    /// whether that was measured rather than estimated.
-    left_need: std::cell::Cell<i32>,
-    left_measured: std::cell::Cell<bool>,
+    /// The second breakpoint: below this the buttons draw narrower, or the
+    /// left group, ⋯ and window controls would push past the pane's edge.
+    /// The left group itself never folds.
+    compact_breakpoint: adw::Breakpoint,
+    /// What the folded row (left group, ⋯, window controls) needs at full
+    /// size, and whether that was measured rather than estimated.
+    compact_need: std::cell::Cell<i32>,
+    compact_measured: std::cell::Cell<bool>,
     /// The row's cost with every action button gone (padding, spacing…).
     base: i32,
     /// One action button's natural width.
@@ -116,9 +117,7 @@ impl AppModel {
     /// enabled under the same conditions. The left group never folds.
     fn show_reader_overflow_menu(&self, sender: &ComponentSender<Self>) {
         let has_current = self.current.is_some();
-        // A pane too narrow for the left group folds it in as Focus Mode does.
-        let focus =
-            self.focus.active(config::FocusPart::ReaderToolbar) || self.reader_left_collapsed;
+        let focus = self.focus.active(config::FocusPart::ReaderToolbar);
         let sections = if self.showing_outbox {
             self.outbox_overflow_sections(has_current, focus, sender)
         } else {
@@ -298,11 +297,10 @@ impl AppModel {
         self.reader_compose.is_none()
             && (item == config::ToolbarItem::Delete || !self.showing_outbox)
             && match self.reader_toolbar.side(item) {
-                Some(ToolbarSide::Left) => !self.reader_left_collapsed,
-                // The second fold is applied alone, in place of the first.
-                Some(ToolbarSide::Right) => {
-                    !self.reader_actions_collapsed && !self.reader_left_collapsed
-                }
+                Some(ToolbarSide::Left) => true,
+                // The compact breakpoint is applied alone, in place of the
+                // fold, and folds the right group all the same.
+                Some(ToolbarSide::Right) => !self.reader_actions_collapsed && !self.reader_compact,
                 None => false,
             }
     }
@@ -312,10 +310,10 @@ impl AppModel {
     /// Outbox keeps View Source there regardless).
     pub(super) fn reader_overflow_wanted(&self) -> bool {
         // Focus Mode folds the whole row in, so the ⋯ is the toolbar.
-        if self.focus.active(config::FocusPart::ReaderToolbar) || self.reader_left_collapsed {
+        if self.focus.active(config::FocusPart::ReaderToolbar) {
             return true;
         }
-        self.reader_actions_collapsed
+        (self.reader_actions_collapsed || self.reader_compact)
             && (self.showing_outbox || !self.reader_toolbar.right.is_empty())
     }
 
@@ -389,9 +387,9 @@ impl AppModel {
         // with the headerbar's spacing, and its padding at both ends.
         let left = (self.reader_toolbar.left.len() + 1) as i32;
         let estimate = left * (tb.button_w.max(36) + 6) + tb.controls.get() + 48;
-        tb.left_measured.set(false);
-        tb.left_need.set(estimate);
-        tb.left_breakpoint
+        tb.compact_measured.set(false);
+        tb.compact_need.set(estimate);
+        tb.compact_breakpoint
             .set_condition(Some(&max_width(f64::from(estimate))));
         tb.bin.queue_resize();
         let s = self.self_sender.clone();
@@ -400,10 +398,10 @@ impl AppModel {
         });
     }
 
-    /// The second fold's width, from the folded row as it is drawn: only
-    /// with the right group folded and the left group still on the bar.
-    /// The widest seen since the layout last changed counts, so the
-    /// Outbox's shorter row cannot lower it.
+    /// The compact breakpoint's width, from the folded row as it is drawn
+    /// at full size: only with the right group folded. The widest seen
+    /// since the layout last changed counts, so the Outbox's shorter row
+    /// cannot lower it.
     fn measure_reader_fold(&self) {
         let (Some(header), Some(tb)) =
             (self.reader_header.get(), self.reader_toolbar_widgets.get())
@@ -411,26 +409,42 @@ impl AppModel {
             return;
         };
         if !self.reader_actions_collapsed
-            || self.reader_left_collapsed
+            || self.reader_compact
             || self.reader_compose.is_some()
             || self.focus.active(config::FocusPart::ReaderToolbar)
         {
+            return;
+        }
+        // The left group's revealers open after the first frames: measured
+        // before, the row looks empty. Try again once they are open.
+        let opening = self.reader_toolbar.left.iter().any(|item| {
+            tb.buttons
+                .iter()
+                .find(|(i, _)| i == item)
+                .and_then(|(_, w)| w.downcast_ref::<gtk::Revealer>())
+                .is_some_and(|r| r.get_visible() && !r.is_child_revealed())
+        });
+        if opening || !header.is_mapped() {
+            let s = self.self_sender.clone();
+            gtk::glib::timeout_add_local_once(std::time::Duration::from_millis(250), move || {
+                let _ = s.send(AppMsg::MeasureReaderFold);
+            });
             return;
         }
         // The minimum, not the natural width: a headerbar's natural width
         // keeps its title centred, as wide again as its wider side, while
         // the buttons only collide below the two sides side by side.
         let need = header.measure(gtk::Orientation::Horizontal, -1).0 + 8;
-        let need = if tb.left_measured.get() {
-            need.max(tb.left_need.get())
+        let need = if tb.compact_measured.get() {
+            need.max(tb.compact_need.get())
         } else {
             need
         };
-        tb.left_measured.set(true);
-        if need != tb.left_need.get() {
-            tracing::info!("reader toolbar: the left group folds below {need}px");
-            tb.left_need.set(need);
-            tb.left_breakpoint
+        tb.compact_measured.set(true);
+        if need != tb.compact_need.get() {
+            tracing::info!("reader toolbar: compact below {need}px");
+            tb.compact_need.set(need);
+            tb.compact_breakpoint
                 .set_condition(Some(&max_width(f64::from(need))));
         }
     }
@@ -459,10 +473,17 @@ impl AppModel {
                 }
             }
 
-            AppMsg::SetReaderLeftCollapsed(on) => {
-                self.reader_left_collapsed = on;
+            AppMsg::SetReaderCompact(on) => {
+                self.reader_compact = on;
                 self.reader_overflow_btn
                     .set_visible(self.reader_overflow_wanted());
+                if let Some(header) = self.reader_header.get() {
+                    if on {
+                        header.add_css_class("compact");
+                    } else {
+                        header.remove_css_class("compact");
+                    }
+                }
             }
 
             AppMsg::MeasureReaderFold => self.measure_reader_fold(),
@@ -567,8 +588,20 @@ impl AppModel {
         );
         widgets.reader_bin.add_breakpoint(bp.clone());
         // Added last: where both match, the bin applies this one alone.
-        let left_bp = fold_breakpoint(sender, 0.0, AppMsg::SetReaderLeftCollapsed);
-        widgets.reader_bin.add_breakpoint(left_bp.clone());
+        let compact_bp = fold_breakpoint(sender, 0.0, AppMsg::SetReaderCompact);
+        widgets.reader_bin.add_breakpoint(compact_bp.clone());
+        for (_, w) in &buttons {
+            if let Some(r) = w.downcast_ref::<gtk::Revealer>() {
+                follow_button(r);
+            }
+        }
+        for r in [
+            &widgets.tb_outbox_edit,
+            &widgets.tb_outbox_send,
+            &widgets.tb_outbox_send_all,
+        ] {
+            follow_button(r);
+        }
         let _ = self.reader_toolbar_widgets.set(ReaderToolbarWidgets {
             buttons,
             outbox: vec![
@@ -579,9 +612,9 @@ impl AppModel {
             spinner: widgets.tb_spinner.clone().upcast(),
             bin: widgets.reader_bin.clone(),
             breakpoint: bp,
-            left_breakpoint: left_bp,
-            left_need: std::cell::Cell::new(0),
-            left_measured: std::cell::Cell::new(false),
+            compact_breakpoint: compact_bp,
+            compact_need: std::cell::Cell::new(0),
+            compact_measured: std::cell::Cell::new(false),
             base,
             button_w,
             controls: std::cell::Cell::new(controls),
@@ -678,6 +711,29 @@ fn button_widths(buttons: &[(config::ToolbarItem, gtk::Widget)]) -> (i32, i32) {
         }
     }
     (packed_sum, button_w)
+}
+
+/// Show a button's Focus Mode revealer only while the button shows: an
+/// empty revealer still takes the headerbar's spacing, and a folded right
+/// group left enough of it to push the window controls off a narrow pane.
+fn follow_button(revealer: &gtk::Revealer) {
+    let Some(child) = revealer.child() else {
+        return;
+    };
+    // Tags, Move To and Snooze sit in a box of their own.
+    let button = match child.downcast_ref::<gtk::Box>() {
+        Some(b) => b.first_child().unwrap_or(child.clone()),
+        None => child,
+    };
+    // The button's own flag: `is_visible` asks its ancestors too, and
+    // the revealer is one of them.
+    revealer.set_visible(button.get_visible());
+    let r = revealer.downgrade();
+    button.connect_visible_notify(move |b| {
+        if let Some(r) = r.upgrade() {
+            r.set_visible(b.get_visible());
+        }
+    });
 }
 
 /// A pane narrower than `px`.

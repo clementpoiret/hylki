@@ -176,7 +176,7 @@ impl AppModel {
             lightbox,
             attachments_loading: false,
             reader_actions_collapsed: false,
-            reader_left_collapsed: false,
+            reader_compact: false,
             reader_toolbar: config::load_reader_toolbar(),
             reader_toolbar_widgets: std::cell::OnceCell::new(),
             reader_overflow_btn: {

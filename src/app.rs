@@ -489,8 +489,7 @@ impl SimpleComponent for AppModel {
                                         add_css_class: "flat",
                                         #[watch]
                                         set_visible: model.showing_outbox
-                                            && model.reader_compose.is_none()
-                                            && !model.reader_left_collapsed,
+                                            && model.reader_compose.is_none(),
                                         #[watch]
                                         set_sensitive: model.current.is_some(),
                                         connect_clicked[sender] => move |_| sender.input(AppMsg::EditCurrentOutbox),
@@ -507,8 +506,7 @@ impl SimpleComponent for AppModel {
                                         add_css_class: "flat",
                                         #[watch]
                                         set_visible: model.showing_outbox
-                                            && model.reader_compose.is_none()
-                                            && !model.reader_left_collapsed,
+                                            && model.reader_compose.is_none(),
                                         #[watch]
                                         set_sensitive: model.current.is_some(),
                                         connect_clicked[sender] => move |_| sender.input(AppMsg::SendCurrentOutbox),
@@ -524,8 +522,7 @@ impl SimpleComponent for AppModel {
                                         add_css_class: "flat",
                                         #[watch]
                                         set_visible: model.showing_outbox
-                                            && model.reader_compose.is_none()
-                                            && !model.reader_left_collapsed,
+                                            && model.reader_compose.is_none(),
                                         connect_clicked[sender] => move |_| sender.input(AppMsg::RetryAllOutbox),
                                     },
                                 },

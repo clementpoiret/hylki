@@ -162,9 +162,9 @@ pub(crate) struct AppModel {
     /// The reader header's right-hand actions are collapsed into the overflow menu
     /// (pane squeezed under READER_ACTIONS_BREAKPOINT).
     pub(super) reader_actions_collapsed: bool,
-    /// The pane is too narrow even for the left group beside the overflow
-    /// button and the window controls: every action is in the ⋯ menu.
-    pub(super) reader_left_collapsed: bool,
+    /// The pane is too narrow for the left group beside the overflow button
+    /// and the window controls at full size: the buttons draw narrower.
+    pub(super) reader_compact: bool,
     /// The collapsed header's ⋯ button — the anchor its menu pops from.
     pub(super) reader_overflow_btn: gtk::Button,
     /// The reader header's layout: which buttons, which side, what order

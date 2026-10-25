@@ -1420,6 +1420,20 @@ headerbar.compose-toolbar button.image-button {
   padding-right: 3px;
 }
 
+/* The narrowest reader pane: the left group never folds, so its buttons
+   and the ⋯ draw narrower instead of pushing the window controls past the
+   pane's edge. The window controls keep their size. */
+headerbar.reader-toolbar.compact box.start,
+headerbar.reader-toolbar.compact box.end {
+  border-spacing: 0;
+}
+headerbar.reader-toolbar.compact box.start button,
+headerbar.reader-toolbar.compact box.end > button {
+  min-width: 24px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
 .reader-header {
   /* The account chip's top sits level with the top of the message list's
      first highlight pill, so the two panes start on one line instead of the
