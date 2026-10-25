@@ -39,6 +39,11 @@ pub(super) struct ReaderToolbarWidgets {
     /// size, and whether that was measured rather than estimated.
     compact_need: std::cell::Cell<i32>,
     compact_measured: std::cell::Cell<bool>,
+    /// What the whole row needs with the right group showing, and whether
+    /// that was measured: the fold comes when the two groups are one
+    /// button gap apart.
+    full_need: std::cell::Cell<i32>,
+    full_measured: std::cell::Cell<bool>,
     /// The row's cost with every action button gone (padding, spacing…).
     base: i32,
     /// One action button's natural width.
@@ -388,6 +393,8 @@ impl AppModel {
         let left = (self.reader_toolbar.left.len() + 1) as i32;
         let estimate = left * (tb.button_w.max(36) + 6) + tb.controls.get() + 48;
         tb.compact_measured.set(false);
+        tb.full_measured.set(false);
+        tb.full_need.set(threshold as i32);
         tb.compact_need.set(estimate);
         tb.compact_breakpoint
             .set_condition(Some(&max_width(f64::from(estimate))));
@@ -398,30 +405,30 @@ impl AppModel {
         });
     }
 
-    /// The compact breakpoint's width, from the folded row as it is drawn
-    /// at full size: only with the right group folded. The widest seen
-    /// since the layout last changed counts, so the Outbox's shorter row
-    /// cannot lower it.
+    /// The breakpoints' widths, from the row as it is drawn. With the right
+    /// group showing, its minimum width is where the groups meet: the fold
+    /// comes one button gap before. With it folded, the same measure is
+    /// where the compact buttons take over, and the right group's buttons
+    /// on top of it stand in for the whole row until it is seen again. The
+    /// widest seen since the layout last changed counts, so a shorter row
+    /// (the Outbox's, the toolbar without its Tags) cannot lower either.
     fn measure_reader_fold(&self) {
         let (Some(header), Some(tb)) =
             (self.reader_header.get(), self.reader_toolbar_widgets.get())
         else {
             return;
         };
-        if !self.reader_actions_collapsed
-            || self.reader_compact
+        if self.reader_compact
             || self.reader_compose.is_some()
+            || self.showing_outbox
             || self.focus.active(config::FocusPart::ReaderToolbar)
         {
             return;
         }
-        // The left group's revealers open after the first frames: measured
-        // before, the row looks empty. Try again once they are open.
-        let opening = self.reader_toolbar.left.iter().any(|item| {
-            tb.buttons
-                .iter()
-                .find(|(i, _)| i == item)
-                .and_then(|(_, w)| w.downcast_ref::<gtk::Revealer>())
+        // The revealers open after the first frames: measured before, the
+        // row looks empty. Try again once they are open.
+        let opening = tb.buttons.iter().any(|(_, w)| {
+            w.downcast_ref::<gtk::Revealer>()
                 .is_some_and(|r| r.get_visible() && !r.is_child_revealed())
         });
         if opening || !header.is_mapped() {
@@ -434,19 +441,78 @@ impl AppModel {
         // The minimum, not the natural width: a headerbar's natural width
         // keeps its title centred, as wide again as its wider side, while
         // the buttons only collide below the two sides side by side.
-        let need = header.measure(gtk::Orientation::Horizontal, -1).0 + 8;
-        let need = if tb.compact_measured.get() {
-            need.max(tb.compact_need.get())
-        } else {
-            need
+        let min = header.measure(gtk::Orientation::Horizontal, -1).0;
+        let (button, gap) = self.toolbar_button_pitch(tb);
+        let widest = |need: i32, cell: &std::cell::Cell<i32>, seen: &std::cell::Cell<bool>| {
+            let need = if seen.get() {
+                need.max(cell.get())
+            } else {
+                need
+            };
+            seen.set(true);
+            (need != cell.get()).then(|| {
+                cell.set(need);
+                need
+            })
         };
-        tb.compact_measured.set(true);
-        if need != tb.compact_need.get() {
-            tracing::info!("reader toolbar: compact below {need}px");
-            tb.compact_need.set(need);
-            tb.compact_breakpoint
+        if self.reader_actions_collapsed {
+            if let Some(need) = widest(min + gap, &tb.compact_need, &tb.compact_measured) {
+                tracing::info!("reader toolbar: compact below {need}px");
+                tb.compact_breakpoint
+                    .set_condition(Some(&max_width(f64::from(need))));
+            }
+            if !tb.full_measured.get() {
+                let right = self
+                    .reader_toolbar
+                    .right
+                    .iter()
+                    .filter(|i| **i != config::ToolbarItem::Tags || !self.tags.is_empty())
+                    .count() as i32;
+                // The ⋯ goes as the right group comes.
+                let need = min - button + right * (button + gap) + gap;
+                tb.full_need.set(need);
+                tb.breakpoint
+                    .set_condition(Some(&max_width(f64::from(need))));
+            }
+        } else if let Some(need) = widest(min + gap, &tb.full_need, &tb.full_measured) {
+            tracing::info!("reader toolbar: the right group folds below {need}px");
+            tb.breakpoint
                 .set_condition(Some(&max_width(f64::from(need))));
         }
+    }
+
+    /// One toolbar button's width and the gap between two, from the left
+    /// group as it is drawn.
+    fn toolbar_button_pitch(&self, tb: &ReaderToolbarWidgets) -> (i32, i32) {
+        let shown: Vec<&gtk::Widget> = self
+            .reader_toolbar
+            .left
+            .iter()
+            .filter_map(|item| tb.buttons.iter().find(|(i, _)| i == item))
+            .map(|(_, w)| w)
+            .filter(|w| w.get_visible())
+            .collect();
+        let button = tb.button_w.max(1);
+        let Some(row) = shown.first().and_then(|w| w.parent()) else {
+            return (button, 6);
+        };
+        let mut children = 0;
+        let mut sum = 0;
+        let mut child = row.first_child();
+        while let Some(c) = child {
+            if c.get_visible() {
+                children += 1;
+                sum += c.measure(gtk::Orientation::Horizontal, -1).0;
+            }
+            child = c.next_sibling();
+        }
+        let row_min = row.measure(gtk::Orientation::Horizontal, -1).0;
+        let gap = if children > 1 {
+            (row_min - sum) / (children - 1)
+        } else {
+            6
+        };
+        (button, gap.max(0))
     }
 
     /// Tooltip for the toolbar's trash button: says when it will delete the
@@ -465,12 +531,10 @@ impl AppModel {
                 self.reader_actions_collapsed = on;
                 self.reader_overflow_btn
                     .set_visible(self.reader_overflow_wanted());
-                if on {
-                    let s = sender.input_sender().clone();
-                    self.after_paint(move || {
-                        let _ = s.send(AppMsg::MeasureReaderFold);
-                    });
-                }
+                let s = sender.input_sender().clone();
+                self.after_paint(move || {
+                    let _ = s.send(AppMsg::MeasureReaderFold);
+                });
             }
 
             AppMsg::SetReaderCompact(on) => {
@@ -590,9 +654,10 @@ impl AppModel {
         // Added last: where both match, the bin applies this one alone.
         let compact_bp = fold_breakpoint(sender, 0.0, AppMsg::SetReaderCompact);
         widgets.reader_bin.add_breakpoint(compact_bp.clone());
+        let remeasure = remeasure_soon(self.self_sender.clone());
         for (_, w) in &buttons {
             if let Some(r) = w.downcast_ref::<gtk::Revealer>() {
-                follow_button(r);
+                follow_button(r, &remeasure);
             }
         }
         for r in [
@@ -600,7 +665,7 @@ impl AppModel {
             &widgets.tb_outbox_send,
             &widgets.tb_outbox_send_all,
         ] {
-            follow_button(r);
+            follow_button(r, &remeasure);
         }
         let _ = self.reader_toolbar_widgets.set(ReaderToolbarWidgets {
             buttons,
@@ -615,6 +680,8 @@ impl AppModel {
             compact_breakpoint: compact_bp,
             compact_need: std::cell::Cell::new(0),
             compact_measured: std::cell::Cell::new(false),
+            full_need: std::cell::Cell::new(0),
+            full_measured: std::cell::Cell::new(false),
             base,
             button_w,
             controls: std::cell::Cell::new(controls),
@@ -716,7 +783,9 @@ fn button_widths(buttons: &[(config::ToolbarItem, gtk::Widget)]) -> (i32, i32) {
 /// Show a button's Focus Mode revealer only while the button shows: an
 /// empty revealer still takes the headerbar's spacing, and a folded right
 /// group left enough of it to push the window controls off a narrow pane.
-fn follow_button(revealer: &gtk::Revealer) {
+/// The row is measured again whenever a button comes or goes (a first tag
+/// brings Tags), once per burst of them.
+fn follow_button(revealer: &gtk::Revealer, remeasure: &std::rc::Rc<dyn Fn()>) {
     let Some(child) = revealer.child() else {
         return;
     };
@@ -729,11 +798,28 @@ fn follow_button(revealer: &gtk::Revealer) {
     // the revealer is one of them.
     revealer.set_visible(button.get_visible());
     let r = revealer.downgrade();
+    let remeasure = remeasure.clone();
     button.connect_visible_notify(move |b| {
         if let Some(r) = r.upgrade() {
             r.set_visible(b.get_visible());
         }
+        remeasure();
     });
+}
+
+/// A measurement of the toolbar row in the next idle, however many ask.
+fn remeasure_soon(sender: relm4::Sender<AppMsg>) -> std::rc::Rc<dyn Fn()> {
+    let pending = std::rc::Rc::new(std::cell::Cell::new(false));
+    std::rc::Rc::new(move || {
+        if pending.replace(true) {
+            return;
+        }
+        let (pending, sender) = (pending.clone(), sender.clone());
+        gtk::glib::idle_add_local_once(move || {
+            pending.set(false);
+            let _ = sender.send(AppMsg::MeasureReaderFold);
+        });
+    })
 }
 
 /// A pane narrower than `px`.
