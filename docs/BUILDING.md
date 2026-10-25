@@ -31,6 +31,23 @@ cargo build --release
 ./uninstall.sh        # removes them again (--purge also removes settings and the mail cache)
 ```
 
+## Nix
+
+On x86_64 or aarch64 Linux, the flake supplies the toolchain and dependencies:
+
+```sh
+nix build
+./result/bin/hylki
+nix flake check --print-build-logs
+```
+
+The check builds the package and runs its Rust tests, just as CI does. The
+package version and Rust dependencies come from `Cargo.toml` and `Cargo.lock`;
+no separate Cargo hash needs updating. `flake.lock` pins nixpkgs; update it
+with `nix flake update nixpkgs`.
+
+See [Installing on NixOS](INSTALLING.md#nixos) for declarative installation.
+
 ## Translations
 
 `tools/build-locale.sh` compiles `po/*.po` so a source-tree run picks them up;

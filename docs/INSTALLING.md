@@ -79,6 +79,39 @@ The package needs libadwaita 1.7: Debian 13 (trixie) and later, or Ubuntu
 25.10 and later, on x86_64 only. Ubuntu 24.04 LTS and the distributions built
 on it, such as Linux Mint 22, have an older libadwaita; use the Flatpak there.
 
+## NixOS
+
+The repository includes a Nix flake for x86_64 and aarch64 Linux. With Nix
+flakes enabled, build or run it from a checkout with:
+
+```sh
+nix build
+nix run
+```
+
+To install it declaratively, add this fork to your NixOS flake's inputs:
+
+```nix
+inputs.hylki.url = "github:clementpoiret/hylki";
+```
+
+Pass `inputs` to your modules with `specialArgs = { inherit inputs; };`, then
+add the package in your NixOS configuration:
+
+```nix
+{ inputs, pkgs, ... }:
+{
+  environment.systemPackages = [
+    inputs.hylki.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+}
+```
+
+Password storage needs a Secret Service provider. GNOME already enables
+GNOME Keyring; on other desktops, enable `services.gnome.gnome-keyring.enable`
+or configure another provider. Evolution Data Server is optional for external
+address books (`services.gnome.evolution-data-server.enable = true;`).
+
 ## Gentoo
 
 A community-maintained ebuild lives in
