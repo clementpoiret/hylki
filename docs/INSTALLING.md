@@ -89,10 +89,10 @@ nix build
 nix run
 ```
 
-To install it declaratively, add this fork to your NixOS flake's inputs:
+To install it declaratively, add this repository to your NixOS flake's inputs:
 
 ```nix
-inputs.hylki.url = "github:clementpoiret/hylki";
+inputs.hylki.url = "github:hyprlab/hylki";
 ```
 
 Pass `inputs` to your modules with `specialArgs = { inherit inputs; };`, then
